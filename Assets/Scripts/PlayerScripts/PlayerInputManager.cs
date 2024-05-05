@@ -6,11 +6,11 @@ using UnityEngine;
 public class PlayerInputManager : MonoBehaviour
 {
     PlayerInputs playerInputs;
-    public float horizontalInput;
-    public float verticalInput;
-    public float moveAmount;
-    public Vector2 moveInput;
-    public bool attackInput = false;
+    [SerializeField] float horizontalInput;
+    [SerializeField] float verticalInput;
+    [SerializeField] float moveAmount;
+    [SerializeField] Vector2 moveInput;
+    [SerializeField] bool attackInput = false;
     public bool interact = false;
 
     [Header("Camera Movment Inputs")]
