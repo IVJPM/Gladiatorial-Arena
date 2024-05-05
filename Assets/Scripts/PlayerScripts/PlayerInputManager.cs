@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerInputManager : MonoBehaviour
 {
     PlayerInputs playerInputs;
-    [SerializeField] float horizontalInput;
-    [SerializeField] float verticalInput;
+
+    public float horizontalInput;
+    public float verticalInput;
+    public Vector2 moveInput;
+
     [SerializeField] float moveAmount;
-    [SerializeField] Vector2 moveInput;
     [SerializeField] bool attackInput = false;
     public bool interact = false;
 

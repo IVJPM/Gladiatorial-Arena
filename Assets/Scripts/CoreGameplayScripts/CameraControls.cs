@@ -82,9 +82,8 @@ public class CameraControls : MonoBehaviour
 
     private void HandleCameraRotations()
     {
-        leftRightLookAngle += (playerInputManager.cameraHorizontalInput * leftRightRotationSpeed) * Time.deltaTime;
-        
-        upDownLookAngle -= (playerInputManager.cameraVerticalInput * upDownRotationSpeed) * Time.deltaTime;
+        leftRightLookAngle += (playerInputManager.cameraVerticalInput * leftRightRotationSpeed) * Time.deltaTime;
+        upDownLookAngle += (playerInputManager.cameraHorizontalInput * upDownRotationSpeed) * Time.deltaTime;
 
         upDownLookAngle = Mathf.Clamp(upDownLookAngle, minPivot, maxPivot);
 
