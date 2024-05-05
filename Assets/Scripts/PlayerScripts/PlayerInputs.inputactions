@@ -127,6 +127,134 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "CameraMovement",
+            "id": "0ba2e3a4-940e-41ef-8733-8612cef99f4a",
+            "actions": [
+                {
+                    "name": "CameraMovement",
+                    "type": "PassThrough",
+                    "id": "0d385b2f-09c7-4403-bf4d-78508fc18f4e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "RightAnalogStick",
+                    "id": "9f2dbcfd-8371-4383-a852-dbd8d31f5133",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "771f1335-cb5f-4c9a-9a92-996c0e2b9ff5",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "c4016f7a-ee54-432f-83ee-f1ab58cc8b27",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "c099590f-b8bd-4c02-acef-425a612732da",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f577df91-df60-4350-aaa5-5fe53c83eef7",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "AttackInputs",
+            "id": "9f9323d8-fa9b-4a38-96ed-75006cf7dc61",
+            "actions": [
+                {
+                    "name": "AttackInputs",
+                    "type": "Button",
+                    "id": "213c8b9e-a74b-47b8-a2b2-8ce4f5f88a7e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1f57c36e-6b13-4d12-a0b3-4504ef057a80",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackInputs",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InteractionInput",
+            "id": "79855ea7-333d-4dc8-93fe-add1948e5c28",
+            "actions": [
+                {
+                    "name": "InteractionInput",
+                    "type": "Button",
+                    "id": "11fba23a-97b3-498a-831d-960416d3a2c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "21b747e6-3945-4665-8e96-756ee3f39bcf",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractionInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
