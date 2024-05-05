@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05894b0f180d47643be0f4019aa16450, type: 3}
+  m_Script: {fileID: 11500000, guid: fcfaa912f083f2f468407ad6a5bf3ec4, type: 3}
   m_Name: ScriptableObjectItemInventory
   m_EditorClassIdentifier: 
   itemName: Items
-  ItemInventory:
-  - {fileID: 0}
-  - {fileID: 0}
+  ItemInventory: []

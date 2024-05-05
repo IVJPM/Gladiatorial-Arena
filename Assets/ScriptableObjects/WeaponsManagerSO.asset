@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a207e6a0f46172241ab4df6e189ee009, type: 3}
+  m_Script: {fileID: 11500000, guid: bcbe8b4390fe2f2418ef6d8e0f9fc092, type: 3}
   m_Name: WeaponsManagerSO
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 5417509364789452002, guid: 30f185082f185c649901947927ca8ccc, type: 3}
-  - {fileID: 7427813537515620574, guid: 1f1189e1734b09d41b6e902f26a5e842, type: 3}
-  - {fileID: 7258053866339988243, guid: 703b1efc2483c6c42b95d79d869996e9, type: 3}
-  - {fileID: 2936661492804199041, guid: 79d11a63ae694df4d9db379c951b2aa9, type: 3}
+  weapons: []

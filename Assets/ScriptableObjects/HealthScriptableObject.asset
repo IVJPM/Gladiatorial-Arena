@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b39d6bc0a921464bbf6bc7033b64c64, type: 3}
+  m_Script: {fileID: 11500000, guid: 010ed7ee21dbd41459a795dd2d9624a9, type: 3}
   m_Name: HealthScriptableObject
   m_EditorClassIdentifier: 
   maxHP: 100
-  HP: 25
+  HP: 100
   HPchangeEvent:
     m_PersistentCalls:
       m_Calls: []
