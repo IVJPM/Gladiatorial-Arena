@@ -72,10 +72,10 @@ public class PlayerMovement : MonoBehaviour
             //playerRb.AddForce(playerRb.position + moveInput + lookToward * .08f, ForceMode.Impulse);
             playerRb.velocity = lookToward * 5.5f;
 
-            Quaternion finalRotation = Quaternion.RotateTowards(playerRb.rotation, camPlayerRotation, 900 * Time.fixedDeltaTime);
-            Quaternion smoothRotation = Quaternion.Slerp(camPlayerRotation, finalRotation, 10);
-            transform.rotation = smoothRotation;
-            //playerRb.MoveRotation(smoothRotation);
+            Quaternion finalRotation = Quaternion.RotateTowards(playerRb.rotation, camPlayerRotation, 200 * Time.fixedDeltaTime);
+            //Quaternion smoothRotation = Quaternion.Slerp(camPlayerRotation, finalRotation, 10);
+            //transform.rotation = smoothRotation;
+            playerRb.MoveRotation(finalRotation);
 
             animator.SetFloat("forwardMove", forwardSpeed, .1f, Time.deltaTime);
             animator.SetFloat("sideMove", sideSpeed, .1f, Time.deltaTime);

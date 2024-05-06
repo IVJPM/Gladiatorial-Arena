@@ -330,6 +330,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""InteractionInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aee133e8-10f1-4b06-ae3c-a700ddd0f232"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractionInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
