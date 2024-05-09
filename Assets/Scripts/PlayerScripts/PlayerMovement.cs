@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : StateMachineController
 {
     PlayerInputManager playerInputManager;
 
@@ -17,28 +18,61 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkSpeed;
     public float runSpeed;
-    public float moveAmount;
-    public Vector2 moveInput;
+    public float moveAmount { get; private set; }  
+    public Vector2 moveInput; 
     private Vector3 smoothVelocity;
-    public Vector3 move;
 
-    Rigidbody playerRb;
-    Animator animator;
+    public Vector3 move;
+    public bool isMoving;
     public float gravityModifier;
 
+    public State idleState; //Try [SerializeField] after making sure this works
+    public State runState;
 
     // Start is called before the first frame update
     void Awake()
     {
-        animator = GetComponent<Animator>();
-        playerRb = GetComponent<Rigidbody>();
+        //animator = GetComponent<Animator>();
+        //playerRb = GetComponent<Rigidbody>();
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
+    private void Start()
+    {
+        SetUpStateInstances();
+        stateMachine.Set(idleState);
+        isMoving = false;
+
+        stateMachine = new StateMachine();
+
+    }
+
+    private void Update()
+    {
+        SetCharacterState();
+
+        stateMachine.state.StartState();
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         HandleMovement();
+    }
+
+    private void SetCharacterState()
+    {
+        if(groundCheck.isGrounded)
+        {
+            if (moveAmount == 0)
+            {
+                stateMachine.Set(idleState);
+            }
+            else
+            {
+                stateMachine.Set(runState);
+            }
+        }
     }
 
     private void HandleMovement()
@@ -49,20 +83,18 @@ public class PlayerMovement : MonoBehaviour
 
         move = new Vector3(moveInput.x, 0, moveInput.y);
         move.Normalize();
+        moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
-        forwardSpeed = move.z;
-        sideSpeed = move.x;
+        //forwardSpeed = rigidbody.velocity.z;
+        //sideSpeed = rigidbody.velocity.x;
 
-        if (move == Vector3.zero)
-        {
-            animator.SetFloat("forwardMove", forwardSpeed, .1f, Time.deltaTime);
-            animator.SetFloat("sideMove", sideSpeed, .1f, Time.deltaTime);
-        }
-
+        
         if (move != Vector3.zero)
         {
-            forwardSpeed = move.z;
-            sideSpeed = move.x;
+            isMoving = true;
+
+            forwardSpeed = moveAmount;
+            sideSpeed = moveAmount;
 
             Vector3 camForward = camTurn.transform.forward;
             camForward.y = 0;
@@ -70,15 +102,19 @@ public class PlayerMovement : MonoBehaviour
             Vector3 lookToward = camRelativeRotation * move;
             Quaternion camPlayerRotation = Quaternion.LookRotation(lookToward, Vector3.up);
             //playerRb.AddForce(playerRb.position + moveInput + lookToward * .08f, ForceMode.Impulse);
-            playerRb.velocity = lookToward * 5.5f;
+            rigidbody.velocity = lookToward * 5.5f;
 
-            Quaternion finalRotation = Quaternion.RotateTowards(playerRb.rotation, camPlayerRotation, 200 * Time.fixedDeltaTime);
+            Quaternion finalRotation = Quaternion.RotateTowards(rigidbody.rotation, camPlayerRotation, 900 * Time.fixedDeltaTime);
             //Quaternion smoothRotation = Quaternion.Slerp(camPlayerRotation, finalRotation, 10);
             //transform.rotation = smoothRotation;
-            playerRb.MoveRotation(finalRotation);
+            rigidbody.MoveRotation(finalRotation);
 
-            animator.SetFloat("forwardMove", forwardSpeed, .1f, Time.deltaTime);
-            animator.SetFloat("sideMove", sideSpeed, .1f, Time.deltaTime);
+            //animator.SetFloat("forwardMove", forwardSpeed, .1f, Time.deltaTime); // Use for Idle as well
+            //animator.SetFloat("sideMove", sideSpeed, .1f, Time.deltaTime);
+        }
+        else
+        {
+            isMoving = false;
         }
     }
 }
