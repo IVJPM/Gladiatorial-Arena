@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,8 +30,6 @@ public class PlayerMovement : StateMachineController
     // Start is called before the first frame update
     void Awake()
     {
-        //animator = GetComponent<Animator>();
-        //playerRb = GetComponent<Rigidbody>();
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
@@ -42,9 +38,6 @@ public class PlayerMovement : StateMachineController
         SetUpStateInstances();
         stateMachine.Set(idleState);
         isMoving = false;
-
-        stateMachine = new StateMachine();
-
     }
 
     private void Update()
