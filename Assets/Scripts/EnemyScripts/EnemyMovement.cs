@@ -5,12 +5,15 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] GameObject target;
-    private Animator animator;
-    private Rigidbody enemyRB;
+    public Rigidbody enemyRB { get; private set; }
+
+    public bool canAttack { get; private set; }
+    public float enemyRunSpeed;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         enemyRB = GetComponent<Rigidbody>();
     }
 
@@ -28,7 +31,10 @@ public class EnemyMovement : MonoBehaviour
         //Quaternion enemyLook = Quaternion.RotateTowards(enemyRotation, xRot, 90);
 
         //transform.rotation = xRot;
+    }
 
+    public void HandleEnemyMovement()
+    {
         Vector3 targetPosition = target.transform.position;
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);
@@ -37,15 +43,15 @@ public class EnemyMovement : MonoBehaviour
 
         if (followDistance < 5f && followDistance > 1f)
         {
+            canAttack = true;
+
             enemyRB.velocity = (transform.position - targetPosition);
             transform.position -= enemyRB.velocity * Time.deltaTime;
-            animator.SetBool("walkForward", true);
+            Debug.Log(enemyRB.velocity);
         }
-        else
+       else
         {
-            animator.SetBool("walkForward", false);
+            canAttack = false;
         }
-
-
     }
 }

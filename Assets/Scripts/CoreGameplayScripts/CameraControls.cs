@@ -14,7 +14,7 @@ public class CameraControls : MonoBehaviour
 
     [Header("Camera Settings")]
     private float cameraSmoothSpeed = .25f;
-    private float upDownRotationSpeed = 50;
+    private float upDownRotationSpeed = 40;
     private float leftRightRotationSpeed = 50;
     [SerializeField] float minPivot = -20; // Lowest point to look down
     [SerializeField] float maxPivot = 40; // Highest point to look up
@@ -82,7 +82,7 @@ public class CameraControls : MonoBehaviour
 
     private void HandleCameraRotations()
     {
-        leftRightLookAngle += (playerInputManager.cameraVerticalInput * leftRightRotationSpeed) * Time.deltaTime;
+        leftRightLookAngle -= (playerInputManager.cameraVerticalInput * leftRightRotationSpeed) * Time.deltaTime;
         upDownLookAngle += (playerInputManager.cameraHorizontalInput * upDownRotationSpeed) * Time.deltaTime;
 
         upDownLookAngle = Mathf.Clamp(upDownLookAngle, minPivot, maxPivot);

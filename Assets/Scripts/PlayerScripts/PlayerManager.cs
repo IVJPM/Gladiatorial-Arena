@@ -2,48 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : StateMachineController
 {
-
-
     PlayerInputManager playerInputManager;
-    private enum PlayerActionState
-    {
-        Idle,
-        Moving,
-        Attacking,
-        Interacting
-    }
+    PlayerMovement playerMovement;
+    PlayerAttacks playerAttacks;
 
-    private enum PlayerSubState
-    {
-        Unarmed,
-        Armed
-    }
-    private PlayerSubState currentSubState;
+    [Header("Character States")]
+    public State idleState; //Try [SerializeField] after making sure this works
+    public State runState;
+    public State attackState;
 
-    private PlayerActionState currentPlayerState;
-
+    [SerializeField] float playerMovementSpeed = 7;
+    [SerializeField] float stopMovement = 0;
 
     private void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerAttacks = GetComponent<PlayerAttacks>();
+
+        SetUpStateInstances();
+        stateMachine.Set(idleState);
     }
     private void Update()
     {
-        if(playerInputManager.moveInput != Vector2.zero)
-        {
-            currentPlayerState = PlayerActionState.Moving;
-        }
-        else
-        {
-            currentPlayerState = PlayerActionState.Idle;
-        }
-        //Debug.Log(currentPlayerState.ToString());
+        SetCharacterState();
+        stateMachine.state.StartState();
     }
 
-    private void GetPlayerMovement()
+    void FixedUpdate()
     {
+        playerMovement.HandleMovement();
+        playerAttacks.SwordSwing();
+    }
 
+    private void SetCharacterState()
+    {
+        if (groundCheck.isGrounded)
+        {
+            if (playerInputManager.moveInput == Vector2.zero && playerInputManager.attackInput != true)
+            {
+                stateMachine.Set(idleState);
+            }
+            else if(playerInputManager.moveInput != Vector2.zero && playerInputManager.attackInput != true)
+            {
+                playerMovement.movementSpeed = playerMovementSpeed;
+                stateMachine.Set(runState);
+            }
+            else if (playerInputManager.attackInput == true)
+            {
+                playerMovement.movementSpeed = stopMovement;   
+                stateMachine.Set(attackState);
+            }
+        }
     }
 }

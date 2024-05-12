@@ -36,7 +36,6 @@ public class PlayerInteractables : MonoBehaviour
             canInteract = false;
             return;
         }
-        //print(player.GetComponent<PlayerInputManager>().interact);
         //InteractWithWeapon();
     }
 
