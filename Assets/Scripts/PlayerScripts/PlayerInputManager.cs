@@ -11,8 +11,8 @@ public class PlayerInputManager : MonoBehaviour
     public float verticalInput;
     public Vector2 moveInput;
 
-    [SerializeField] float moveAmount;
-    [SerializeField] bool attackInput = false;
+    public float moveAmount;
+    public bool attackInput;
     public bool interact = false;
 
     [Header("Camera Movment Inputs")]
@@ -21,6 +21,7 @@ public class PlayerInputManager : MonoBehaviour
     Vector2 camRot;
 
     public event EventHandler OnInteract;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,10 +67,5 @@ public class PlayerInputManager : MonoBehaviour
         horizontalInput = moveInput.x;
         // moveInput = new Vector3(horizontalInput, 0, verticalInput);
         moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
-    }
-
-    private void AttackInput()
-    {
-
     }
 }

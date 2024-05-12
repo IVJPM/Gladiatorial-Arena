@@ -10,7 +10,7 @@ public abstract class State : MonoBehaviour
 
     public Animator animator => controller.animator;
 
-    public PlayerMovement playerMovement => controller.playerMovement;
+    //public PlayerManager playerManager => controller.playerManager;
 
     public GroundCheck groundCheck => controller.groundCheck;
 
@@ -20,14 +20,10 @@ public abstract class State : MonoBehaviour
 
     public float time => Time.time - startTime;
 
-    public float moveSpeed;
-
-
     public virtual void EnterState() { }
 
     public virtual void StartState() { }
 
-    //public virtual void Initialize() { }
     public virtual void ExitState() { }
 
    public void SetStateCore(StateMachineController controller) 

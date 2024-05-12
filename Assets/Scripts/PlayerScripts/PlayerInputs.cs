@@ -302,6 +302,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""AttackInputs"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a956fb1f-d73d-4486-a763-417308d24d7d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackInputs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

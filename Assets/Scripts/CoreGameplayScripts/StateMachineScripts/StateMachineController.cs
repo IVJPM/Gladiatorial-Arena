@@ -8,7 +8,7 @@ public abstract class StateMachineController : MonoBehaviour
 
     public Animator animator;
 
-    public PlayerMovement playerMovement;
+    //public PlayerManager playerManager;
 
     public GroundCheck groundCheck;
 
