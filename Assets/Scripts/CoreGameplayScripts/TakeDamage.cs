@@ -25,7 +25,7 @@ public class TakeDamage : MonoBehaviour
         //This triggers the HpManagerSO.HPchangeEvent event
         if (other.gameObject.GetComponent<WeaponDamageIdentifier>())
         {
-            if (this.gameObject.layer == 6)
+            if (this.gameObject.layer == 3)
             {
                 hpManagerSO.DamageHP(damageValue);
                 print(damageValue);

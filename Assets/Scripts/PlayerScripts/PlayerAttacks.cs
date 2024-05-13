@@ -8,6 +8,7 @@ public class PlayerAttacks : State
 
     public float attackReset;
     private bool canAttack;
+    [SerializeField] Transform weaponSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +32,6 @@ public class PlayerAttacks : State
             //animator.SetLayerWeight(layerIndex, layerWeight);
             //animator.SetBool("oneHandedThrust", true);
 
-            /*if (attackReset >= 1)
-            {
-                weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
-            }*/
-
             if (attackReset >= 11f)
             {
                 playerInputManager.attackInput = false;
@@ -43,10 +39,21 @@ public class PlayerAttacks : State
         }
         else if (playerInputManager.attackInput == false)
         {
-            /*weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
-            animator.SetLayerWeight(layerIndex, 0);
-            animator.SetBool("oneHandedThrust", false);*/
+            //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
+            //animator.SetLayerWeight(layerIndex, 0);
+            //animator.SetBool("oneHandedThrust", false);
             attackReset = 0;
         }
+    }
+
+    public void EnableWeaponCollider()
+    {
+        weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
+    }
+
+    public void DisableWeaponCollider()
+    {
+        weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
+
     }
 }
