@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] GameObject target;
     public Rigidbody enemyRB { get; private set; }
 
-    public bool canAttack { get; private set; }
+    public bool chasingPlayer { get; private set; }
     public float enemyRunSpeed;
     
 
@@ -37,21 +37,21 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 targetPosition = target.transform.position;
         targetPosition.y = transform.position.y;
-        transform.LookAt(targetPosition);
 
         float followDistance = Vector3.Distance(transform.position, targetPosition);
 
         if (followDistance < 5f && followDistance > 1f)
         {
-            canAttack = true;
+            chasingPlayer = true;
+            
+            transform.LookAt(targetPosition);
 
             enemyRB.velocity = (transform.position - targetPosition);
-            transform.position -= enemyRB.velocity * Time.deltaTime;
-            Debug.Log(enemyRB.velocity);
+            transform.position -= enemyRB.velocity * enemyRunSpeed * Time.deltaTime;
         }
-       else
+        else
         {
-            canAttack = false;
+            chasingPlayer = false;
         }
     }
 }

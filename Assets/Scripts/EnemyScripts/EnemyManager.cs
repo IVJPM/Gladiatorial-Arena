@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class EnemyManager : StateMachineController
@@ -9,14 +8,21 @@ public class EnemyManager : StateMachineController
     public State idleState; //Try [SerializeField] after making sure this works
     public State runState;
     public State attackState;
+    public State deathState;
 
     [SerializeField] float chasePlayerSpeed;
+    private float activeTimer;
+
 
     EnemyMovement enemyMovement;
+    EnemyAttack enemyAttack;
+
+    [SerializeField] HpManagerSO hpManagerSO;
     // Start is called before the first frame update
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
+        enemyAttack = GetComponent<EnemyAttack>();
 
         SetUpStateInstances();
         stateMachine.Set(idleState);
@@ -33,25 +39,41 @@ public class EnemyManager : StateMachineController
     void FixedUpdate()
     {
         enemyMovement.HandleEnemyMovement();
+        enemyAttack.AttackTarget();
     }
 
     private void SetCharacterState()
     {
         if (groundCheck.isGrounded)
         {
-            if (enemyMovement.enemyRB.velocity == Vector3.zero)
+            if (enemyMovement.chasingPlayer == false && hpManagerSO.HP != 0)
             {
-                stateMachine.Set(idleState);
+                if (enemyAttack.canAttackPlayer == true)
+                {
+                    stateMachine.Set(attackState);
+                }
+                else
+                {
+                    stateMachine.Set(idleState);
+                }
             }
-            else if (enemyMovement.enemyRB.velocity != Vector3.zero)
+            else if (enemyMovement.chasingPlayer == true && hpManagerSO.HP != 0)
             {
-                //enemyMovement.enemyRunSpeed = chasePlayerSpeed;
+                enemyMovement.enemyRunSpeed = chasePlayerSpeed;
                 stateMachine.Set(runState);
             }
-            else if (enemyMovement.canAttack == true)
+            else if(hpManagerSO.HP <= 0)
             {
-                stateMachine.Set(attackState);
+                stateMachine.Set(deathState);
+                StartCoroutine(DestroyEnemy());
             }
         }
     }
+
+    IEnumerator DestroyEnemy()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+    }
+
 }

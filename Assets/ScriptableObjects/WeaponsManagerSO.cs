@@ -17,11 +17,11 @@ public class WeaponsManagerSO : ScriptableObject
     {
         foreach (GameObject weapon in weapons)
         {
-            if (weapon.CompareTag ("UnarmedWeapon"))
+            /*if (weapon.CompareTag ("UnarmedWeapon"))
             {
                 UnarmedWeaponDamage(damage);
                 break;
-            }
+            }*/
 
             if (weapon.CompareTag ("Sword"))
             {
@@ -29,11 +29,11 @@ public class WeaponsManagerSO : ScriptableObject
                 break;
             }
 
-            if (weapon.CompareTag  ("Axe"))
+            /*if (weapon.CompareTag  ("Axe"))
             {
                 AxeDamage(damage);
                 break;
-            }
+            }*/
 
             if (weapon.CompareTag ("Dagger"))
             {

@@ -21,6 +21,7 @@ public class PlayerInputManager : MonoBehaviour
     Vector2 camRot;
 
     public event EventHandler OnInteract;
+    public event EventHandler OnPause;
 
     // Start is called before the first frame update
     void Start()
@@ -44,10 +45,15 @@ public class PlayerInputManager : MonoBehaviour
             playerInputs.CameraMovement.CameraMovement.performed += i => camRot = i.ReadValue<Vector2>();
             playerInputs.AttackInputs.AttackInputs.performed += i => attackInput = true;
             playerInputs.InteractionInput.InteractionInput.performed += Interactable_performed;
+            playerInputs.PauseMenu.Pause.performed += Pause_performed;
         }
 
         playerInputs.Enable();
+    }
 
+    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPause?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interactable_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
