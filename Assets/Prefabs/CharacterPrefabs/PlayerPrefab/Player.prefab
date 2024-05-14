@@ -1298,6 +1298,7 @@ MonoBehaviour:
   attackState: {fileID: 7640626472408047113}
   playerMovementSpeed: 7
   stopMovement: 0
+  pauseGame: {fileID: 0}
 --- !u!114 &4579762165140474211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1839,7 +1840,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3289952751209222406}
-  - component: {fileID: 6387410054116657724}
   m_Layer: 3
   m_Name: RIghtWeaponSlot
   m_TagString: Untagged
@@ -1863,18 +1863,6 @@ Transform:
   - {fileID: 2898523998223215611}
   m_Father: {fileID: 8024351493243979244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6387410054116657724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846890469117841956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c61053f6b06c6459a16d21b9a2699d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2848898086878090011
 GameObject:
   m_ObjectHideFlags: 0

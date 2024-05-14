@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6367459511546357260}
   - component: {fileID: 9203446658840908486}
   - component: {fileID: 2241924317557995936}
-  - component: {fileID: 1556251249796580632}
+  - component: {fileID: 2672100370183386466}
   m_Layer: 9
   m_Name: Dagger
   m_TagString: Dagger
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4026644384297347843, guid: 4347ff9e33c8eaf44a8c3b911cc3db0a, type: 3}
---- !u!114 &1556251249796580632
+--- !u!114 &2672100370183386466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7258053866339988243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c61053f6b06c6459a16d21b9a2699d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7efea0bd124095c4080e12c898956136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDaggerDamage: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 476753541458892497}
   - component: {fileID: 2412015803462443547}
   - component: {fileID: 5308656545553488724}
-  - component: {fileID: 2673149836826681047}
+  - component: {fileID: 9106660700582241629}
   m_Layer: 9
   m_Name: Sword
   m_TagString: Sword
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1407623660032272785, guid: ae1770622c5719243b33e6dfecf10aa6, type: 3}
---- !u!114 &2673149836826681047
+--- !u!114 &9106660700582241629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4213627522537898958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c61053f6b06c6459a16d21b9a2699d, type: 3}
+  m_Script: {fileID: 11500000, guid: c8260a2fc9c844f41afe46abaf6c3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSwordDamage: 0

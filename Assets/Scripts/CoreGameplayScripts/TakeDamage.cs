@@ -12,24 +12,19 @@ public class TakeDamage : MonoBehaviour
     private int damageValue;
     private void Update()
     {
-        GetWeaponDamageValue();
-    }
 
-    private void GetWeaponDamageValue()
-    {
-        damageValue = weaponManagerSO.DamageValue();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //This triggers the HpManagerSO.HPchangeEvent event
-        if (other.gameObject.GetComponent<WeaponDamageIdentifier>())
+        if (other.gameObject.TryGetComponent(out IWeapons weapons))
         {
+            damageValue = weapons.WeaponBaseDamage();
             if (this.gameObject.layer == 3)
             {
                 hpManagerSO.DamageHP(damageValue);
                 print(damageValue);
-                //print(other.gameObject);
             }
         }
     }
