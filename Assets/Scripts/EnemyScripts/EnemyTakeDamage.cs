@@ -8,15 +8,13 @@ public class EnemyTakeDamage : MonoBehaviour
     [SerializeField] WeaponsManagerSO weaponManagerSO;
     [SerializeField] HpManagerSO hpManagerSO;
     [SerializeField] LayerMask layerMask;
+    [SerializeField] AudioClip getHit;
+
+    AudioSource audioSource;
     private int damageValue;
     private void Update()
     {
-        GetWeaponDamageValue();
-    }
-
-    private void GetWeaponDamageValue()
-    {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,6 +29,10 @@ public class EnemyTakeDamage : MonoBehaviour
                 hpManagerSO.DamageHP(damageValue);
                 print(damageValue);
             }
+
+            audioSource.pitch = 1f;
+            audioSource.volume = .75f;
+            audioSource.PlayOneShot(getHit);
         }
     }
 }

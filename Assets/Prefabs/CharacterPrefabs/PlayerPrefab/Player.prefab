@@ -993,7 +993,6 @@ GameObject:
   - component: {fileID: 8073324662582815797}
   - component: {fileID: 6099550172213280215}
   - component: {fileID: 4137236746268126842}
-  - component: {fileID: 7961037301137772131}
   - component: {fileID: 4273039183144678371}
   - component: {fileID: 7809847437614859584}
   - component: {fileID: 4579762165140474211}
@@ -1248,20 +1247,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7961037301137772131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782702501690864755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719a55c4a2d096d41896106e26777f0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSound: {fileID: 8300000, guid: 5fc6bdc73b126564f840972448ea6988, type: 3}
-  swordThrust: {fileID: 0}
 --- !u!114 &4273039183144678371
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,10 +10,7 @@ public class TakeDamage : MonoBehaviour
     [SerializeField] WeaponsManagerSO weaponManagerSO;
     [SerializeField] HpManagerSO hpManagerSO;
     private int damageValue;
-    private void Update()
-    {
-
-    }
+    private int healValue;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,6 +23,12 @@ public class TakeDamage : MonoBehaviour
                 hpManagerSO.DamageHP(damageValue);
                 print(damageValue);
             }
+        }
+        else if (other.gameObject.TryGetComponent(out HealingItem item))
+        {
+            healValue = item.ItemHealAmount();
+            hpManagerSO.HealHP(healValue);
+            Destroy(other.gameObject);
         }
     }
 }

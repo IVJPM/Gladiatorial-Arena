@@ -30,6 +30,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Physics.gravity *= gravityModifier;
+    }
+
+    private void Update()
+    {
+        //move.y = -rigidbody.velocity.y * 100;
 
     }
 

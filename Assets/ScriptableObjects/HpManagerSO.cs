@@ -36,6 +36,8 @@ public class HpManagerSO : ScriptableObject
     public void HealHP(int healAmount)
     {
         HP += healAmount;
+        HPchangeEvent?.Invoke(HP);
+
     }
 
 }
