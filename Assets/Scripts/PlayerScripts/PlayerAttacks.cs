@@ -9,6 +9,7 @@ public class PlayerAttacks : State
     public float attackReset;
     private bool canAttack;
     [SerializeField] Transform weaponSlot;
+    IWeapons weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -46,14 +47,32 @@ public class PlayerAttacks : State
         }
     }
 
-    public void EnableWeaponCollider()
+    public void EnableWeaponsCollider()
     {
-        weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
+        if (weaponSlot.GetChild(0).TryGetComponent(out weapon))
+        {
+            weapon.EnableWeaponCollider();
+            Debug.Log("Swing");
+        }
+        else if (weaponSlot.GetChild(0) == null)
+        {
+            Debug.Log("No swing");
+            return;
+        }
+        //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
     }
 
-    public void DisableWeaponCollider()
+    public void DisableWeaponsCollider()
     {
-        weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
+        if (weaponSlot.GetChild(0).TryGetComponent(out weapon))
+        {
+            weapon.DisableWeaponCollider();
+        }
+        else if (weaponSlot.GetChild(0) == null)
+        {
+            return;
+        }
+        //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
 
     }
 }

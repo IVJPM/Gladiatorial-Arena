@@ -21,13 +21,6 @@ public class InteractionText
      public int currentDialogueChoice;
     //[SerializeField]string[,] dialogueOptions;
 
-   
-
-    private void PlayerInputManager_OnInteract(object sender, System.EventArgs e)
-    {
-
-    }
-
     public string CharacterDialogue()
     {
         for (int i = 0; i < setsOfDialogue.Count; i++)

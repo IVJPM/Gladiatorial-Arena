@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    [SerializeField] BoxCollider ground;
+    [SerializeField] TerrainCollider ground;
     [SerializeField] LayerMask groundMask;
 
     public bool isGrounded { get; private set; }
@@ -19,7 +19,6 @@ public class GroundCheck : MonoBehaviour
     void FixedUpdate()
     {
         CheckGroundState();
-        //Debug.Log(isGrounded);
     }
 
     public void CheckGroundState()

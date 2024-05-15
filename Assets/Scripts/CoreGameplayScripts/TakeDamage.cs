@@ -10,27 +10,25 @@ public class TakeDamage : MonoBehaviour
     [SerializeField] WeaponsManagerSO weaponManagerSO;
     [SerializeField] HpManagerSO hpManagerSO;
     private int damageValue;
-    private void Update()
-    {
-        GetWeaponDamageValue();
-    }
-
-    private void GetWeaponDamageValue()
-    {
-        damageValue = weaponManagerSO.DamageValue();
-    }
+    private int healValue;
 
     private void OnTriggerEnter(Collider other)
     {
         //This triggers the HpManagerSO.HPchangeEvent event
-        if (other.gameObject.GetComponent<WeaponDamageIdentifier>())
+        if (other.gameObject.TryGetComponent(out IWeapons weapons))
         {
+            damageValue = weapons.WeaponBaseDamage();
             if (this.gameObject.layer == 3)
             {
                 hpManagerSO.DamageHP(damageValue);
                 print(damageValue);
-                //print(other.gameObject);
             }
+        }
+        else if (other.gameObject.TryGetComponent(out HealingItem item))
+        {
+            healValue = item.ItemHealAmount();
+            hpManagerSO.HealHP(healValue);
+            Destroy(other.gameObject);
         }
     }
 }
