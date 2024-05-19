@@ -11,8 +11,11 @@ public class InteractionTextManagerSO : ScriptableObject
 {
     [Header("Dialogue Options")]
     [SerializeField] string npcName;
+   // [field: SerializeField] public string dialogueOptions {  get; private set; }
     [TextArea(3, 10)]
     public List<string> npcDialogue;
+
+
 
     /*[SerializeField] TextMeshProUGUI textMeshProDialogue;
     [SerializeField] string npcName;
@@ -28,9 +31,25 @@ public class InteractionTextManagerSO : ScriptableObject
     [SerializeField] int currentDialogueChoice;
     //[SerializeField]string[,] dialogueOptions;*/
    
-   
+    public string InitialMeetingDialogue(string initialDialogue)
+    {
+        if(npcDialogue.Count > 0)
+        {
+            npcDialogue.Clear();
+        }
+        npcDialogue.Add(initialDialogue);
+        return initialDialogue;
+    }
+
+    public List<string> AdjustDialogueOptions(List<string> dialogueOptions)
+    {
+        //npcDialogue.AddRange(dialogueOptions);
+        return dialogueOptions;
+    }
     public void CharacterDialogue()
     {
+        //npcDialogue = new List<string>();
+
        /* if(Vector3.Distance(player.position, npc.transform.position) < 1)
         {
             Debug.Log("not null");

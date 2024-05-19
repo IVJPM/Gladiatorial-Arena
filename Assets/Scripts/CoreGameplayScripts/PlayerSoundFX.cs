@@ -28,7 +28,7 @@ public class PlayerSoundFX : MonoBehaviour
     private void StepAudio()
     {
         audioSource.pitch = 1f;
-        audioSource.volume = .25f;
+        audioSource.volume = .1f;
         audioSource.PlayOneShot(runSound);
     }
 }

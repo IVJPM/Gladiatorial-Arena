@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyTakeDamage : MonoBehaviour
 {
+    public static event EventHandler OnEnemyDeath;
+
     [SerializeField] WeaponsManagerSO weaponManagerSO;
     [SerializeField] HpManagerSO hpManagerSO;
     [SerializeField] LayerMask layerMask;
@@ -28,6 +30,10 @@ public class EnemyTakeDamage : MonoBehaviour
             {
                 hpManagerSO.DamageHP(damageValue);
                 print(damageValue);
+            }
+            if(hpManagerSO.HP <= 0)
+            {
+                OnEnemyDeath?.Invoke(this, EventArgs.Empty);
             }
 
             audioSource.pitch = 1f;
