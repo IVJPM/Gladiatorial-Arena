@@ -2,20 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
+using UnityEngine.Rendering.UI;
 
 public class NPCInteractions : MonoBehaviour, IInteractables
 {
-    [SerializeField] int currentDialogue = 0;
+    [SerializeField] int currentDialogue;
+    [SerializeField] int questCompleteDialogue;
     [SerializeField] bool isInteracting;
-    [SerializeField] string interactionText;
-    public TextMeshProUGUI interactionDialogue;
-    private Transform interactionTarget;
+    [SerializeField] string interactionButtonText;
+    [SerializeField] string initialNpcDialogue;
+    [SerializeField] List<string> newInteractionDialogue;
+
     [SerializeField] InteractionTextManagerSO interactionTextManagerSO;
 
-    public void Interact(Transform interactorTransform)
-    {
-        interactionTarget = interactorTransform;
+    public TextMeshProUGUI interactionDialogue;
+    private Transform interactionTarget;
 
+    private void Awake()
+    {
+        interactionDialogue.text = interactionTextManagerSO.InitialMeetingDialogue(initialNpcDialogue);
+        currentDialogue = 0;
+    }
+
+
+    public virtual void Interact(Transform interactorTransform)
+    {
+
+        interactionTarget = interactorTransform;
         if (interactionDialogue.IsActive() == false)
         {
             isInteracting = true;
@@ -24,7 +38,6 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         if (currentDialogue < interactionTextManagerSO.npcDialogue.Count)
         {
             interactionDialogue.text = interactionTextManagerSO.npcDialogue[currentDialogue];
-            Debug.Log(currentDialogue);
         }
         currentDialogue++;
 
@@ -32,11 +45,14 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         {
             isInteracting = false;
         }
+
     }
 
     private void Update()
     {
-        if(interactionTarget != null)
+        SetNPCDialogue();
+
+        if (interactionTarget != null)
         {
             if (Vector3.Distance(transform.position, interactionTarget.position) > 3f)
             {
@@ -49,9 +65,28 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         }
     }
 
+    private void SetNPCDialogue()
+    {
+        TryGetComponent(out QuestGiver questGiver);
+
+        if (!questGiver.QuestAssigned && !questGiver.FinishedQuest)
+        {
+            interactionDialogue.text = interactionTextManagerSO.InitialMeetingDialogue(initialNpcDialogue);
+
+            questGiver.AssignQuest();
+        }
+        else if (questGiver.QuestAssigned && !questGiver.FinishedQuest)
+        {
+            questGiver.CheckAssignedQuestStatus();
+        }
+        else
+        {
+            interactionTextManagerSO.npcDialogue = interactionTextManagerSO.AdjustDialogueOptions(newInteractionDialogue);
+        }
+    }
     public string GetInteractionText()
     {
-        return interactionText;
+        return interactionButtonText;
     }
 
     public Transform GetInteractionTransform()

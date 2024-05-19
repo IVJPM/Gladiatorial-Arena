@@ -5,7 +5,7 @@ using UnityEngine;
 public class DaggerManager : MonoBehaviour, IWeapons
 {
 
-    Collider collider;
+    new Collider collider;
 
     [SerializeField] int baseDaggerDamage;
     // Start is called before the first frame update

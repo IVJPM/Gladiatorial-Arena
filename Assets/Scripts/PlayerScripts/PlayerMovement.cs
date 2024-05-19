@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     PlayerInputManager playerInputManager;
 
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     [SerializeField] float horizontalInput;
     [SerializeField] float verticalInput;
     [SerializeField] GameObject camTurn;

@@ -1014,6 +1014,22 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &895404632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895404619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f77c5232608ce4cb48aa766b6053c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionTextManagerSO: {fileID: 11400000, guid: f8fbc278370676c459bbbb51255cc2a7,
+    type: 2}
+  quests: {fileID: 1351598633}
+  questType: IntroQuestKillPlagueDoctor
 --- !u!1001 &900026830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1865,7 +1881,7 @@ PrefabInstance:
     - target: {fileID: 3255953556716913822, guid: b4a79bd2a2c960f4f8f45e4014978a83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.13
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3255953556716913822, guid: b4a79bd2a2c960f4f8f45e4014978a83,
         type: 3}
@@ -1875,7 +1891,7 @@ PrefabInstance:
     - target: {fileID: 3255953556716913822, guid: b4a79bd2a2c960f4f8f45e4014978a83,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.69
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3255953556716913822, guid: b4a79bd2a2c960f4f8f45e4014978a83,
         type: 3}
@@ -5691,14 +5707,100 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
         type: 3}
+      propertyPath: interactions
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
       propertyPath: interactionText
       value: 'E: Speak'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: initialNpcDialogue
+      value: Help! That man behind the hill has stolen my face!
       objectReference: {fileID: 0}
     - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
         type: 3}
       propertyPath: interactionDialogue
       value: 
       objectReference: {fileID: 1800027948}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: interactionButtonText
+      value: Speak
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: questCompleteDialogue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: interactions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: interactions.Array.data[0]
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: additionalDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newDialogueOptions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: additionalDialogue.Array.data[0]
+      value: Hi!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newDialogueOptions.Array.data[0]
+      value: You got him!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newInteractionDialogue.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newInteractionDialogue.Array.data[0]
+      value: You got him! Thank you!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newInteractionDialogue.Array.data[1]
+      value: Wish I could still get my face back though...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newInteractionDialogue.Array.data[2]
+      value: You know, you should enter the arena nearby.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newInteractionDialogue.Array.data[3]
+      value: It's right behind that slightly bigger hill.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: newInteractionDialogue.Array.data[4]
+      value: I'd enter too, but, well, I no longer have eyes...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556582947876725772, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      propertyPath: <interactionTextManagerSO>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: f8fbc278370676c459bbbb51255cc2a7,
+        type: 2}
     - target: {fileID: 6580490525791100444, guid: 977644597387cc14892d7b14a0d64547,
         type: 3}
       propertyPath: m_Layer
@@ -6566,6 +6668,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 895404626}
+    - targetCorrespondingSourceObject: {fileID: 1722129791894379077, guid: 977644597387cc14892d7b14a0d64547,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 895404632}
   m_SourcePrefab: {fileID: 100100000, guid: 977644597387cc14892d7b14a0d64547, type: 3}
 --- !u!1 &1286530010
 GameObject:
@@ -6775,7 +6881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 464830, guid: fb5a9652227c545d98a413cd73b80b69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.01
+      value: 1.886
       objectReference: {fileID: 0}
     - target: {fileID: 464830, guid: fb5a9652227c545d98a413cd73b80b69, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6822,6 +6928,50 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 64129321}
   m_SourcePrefab: {fileID: 100100000, guid: fb5a9652227c545d98a413cd73b80b69, type: 3}
+--- !u!1 &1351598633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351598634}
+  - component: {fileID: 1351598635}
+  m_Layer: 0
+  m_Name: Quests
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1351598634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351598633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1351598635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351598633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613e93f2f0ede8c4da208301d1917ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1405704739
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,6 +7912,16 @@ PrefabInstance:
       propertyPath: pauseGame
       value: 
       objectReference: {fileID: 1028763015}
+    - target: {fileID: 7809847437614859584, guid: 60770bdb4dc667c45bea53db0339dc05,
+        type: 3}
+      propertyPath: questManagerSO
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809847437614859584, guid: 60770bdb4dc667c45bea53db0339dc05,
+        type: 3}
+      propertyPath: playerMovementSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8073324662582815797, guid: 60770bdb4dc667c45bea53db0339dc05,
         type: 3}
       propertyPath: camTurn
@@ -8054,6 +8214,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHealthCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8409039339022420227, guid: f66c19cdcf572884bbf0735e04d70d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8417468477560520542, guid: f66c19cdcf572884bbf0735e04d70d44,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -8091,3 +8256,4 @@ SceneRoots:
   - {fileID: 2018459519}
   - {fileID: 6241831198478288875}
   - {fileID: 1319284579}
+  - {fileID: 1351598634}

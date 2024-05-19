@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordManager : MonoBehaviour, IWeapons
 {
-    Collider collider;
+    new Collider collider;
 
     [SerializeField] int baseSwordDamage;
     // Start is called before the first frame update
