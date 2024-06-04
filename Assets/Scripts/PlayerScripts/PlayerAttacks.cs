@@ -17,12 +17,6 @@ public class PlayerAttacks : State
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SwordSwing()
     {
 

@@ -8,9 +8,8 @@ public class PlayerSoundFX : MonoBehaviour
     PlayerInputManager playerInputManager;
     private AudioSource audioSource;
     [SerializeField] AudioClip runSound;
-    [SerializeField] AudioClip swordThrust;
-    //[SerializeField] GameObject leftFootStep;
-    //[SerializeField] GameObject rightFootStep;
+    [SerializeField] AudioClip swordSwing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +29,10 @@ public class PlayerSoundFX : MonoBehaviour
         audioSource.pitch = 1f;
         audioSource.volume = .1f;
         audioSource.PlayOneShot(runSound);
+    }
+
+    private void SwordSwingAudio()
+    {
+        SoundFXManager.Instance.ActionSoundFX(audioSource, swordSwing, .3f);
     }
 }
