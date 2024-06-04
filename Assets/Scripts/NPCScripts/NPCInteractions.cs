@@ -12,8 +12,8 @@ public class NPCInteractions : MonoBehaviour, IInteractables
     [SerializeField] bool isInteracting;
     [SerializeField] string interactionButtonText;
     [SerializeField] string initialNpcDialogue;
-    [SerializeField] List<string> newInteractionDialogue;
 
+    [SerializeField] List<string> newInteractionDialogue;
     [SerializeField] InteractionTextManagerSO interactionTextManagerSO;
 
     public TextMeshProUGUI interactionDialogue;
@@ -68,20 +68,26 @@ public class NPCInteractions : MonoBehaviour, IInteractables
     private void SetNPCDialogue()
     {
         TryGetComponent(out QuestGiver questGiver);
-
-        if (!questGiver.QuestAssigned && !questGiver.FinishedQuest)
+        if(questGiver != null)
         {
-            interactionDialogue.text = interactionTextManagerSO.InitialMeetingDialogue(initialNpcDialogue);
+            if (!questGiver.QuestAssigned && !questGiver.FinishedQuest)
+            {
+                interactionDialogue.text = interactionTextManagerSO.InitialMeetingDialogue(initialNpcDialogue);
 
-            questGiver.AssignQuest();
-        }
-        else if (questGiver.QuestAssigned && !questGiver.FinishedQuest)
-        {
-            questGiver.CheckAssignedQuestStatus();
+                questGiver.AssignQuest();
+            }
+            else if (questGiver.QuestAssigned && !questGiver.FinishedQuest)
+            {
+                questGiver.CheckAssignedQuestStatus();
+            }
+            else
+            {
+                interactionTextManagerSO.npcDialogue = interactionTextManagerSO.AdjustDialogueOptions(newInteractionDialogue);
+            }
         }
         else
         {
-            interactionTextManagerSO.npcDialogue = interactionTextManagerSO.AdjustDialogueOptions(newInteractionDialogue);
+            return;
         }
     }
     public string GetInteractionText()

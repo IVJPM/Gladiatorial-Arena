@@ -36,9 +36,7 @@ public class EnemyTakeDamage : MonoBehaviour
                 OnEnemyDeath?.Invoke(this, EventArgs.Empty);
             }
 
-            audioSource.pitch = 1f;
-            audioSource.volume = .75f;
-            audioSource.PlayOneShot(getHit);
+            SoundFXManager.Instance.CollisionSoundFX(audioSource, getHit, 1f);
         }
     }
 }

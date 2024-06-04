@@ -1,30 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
+using UnityEngine.Rendering;
+using System.Xml.Serialization;
 
 public class SoundFXManager : MonoBehaviour
 {
+    public static SoundFXManager Instance;
+
     PlayerInputManager playerInputManager;
-    private AudioSource audioSource;
-    [SerializeField] AudioClip walkSound;
-    [SerializeField] AudioClip swordThrust;
-    //[SerializeField] GameObject leftFootStep;
-    //[SerializeField] GameObject rightFootStep;
-    // Start is called before the first frame update
-    void Start()
+   
+    private void Awake()
     {
-        playerInputManager = GetComponent<PlayerInputManager>() ;
-        audioSource = GetComponent<AudioSource>();
-        //walkSound = audioSource.clip;
+        if (Instance != null)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnableAndDisableSoundFX(AudioSource audioSource, Transform audioTarget, float audioDistance)
     {
-         
+        if (Vector3.Distance(audioSource.transform.position, audioTarget.position) < audioDistance)
+        {
+            audioSource.enabled = true;
+        }
+        else
+        {
+            audioSource.enabled = false;
+        }
     }
 
-    void SwordThrustAudio()
+    public void CollisionSoundFX(AudioSource source, AudioClip collisionSound, float volume)
+    {
+        if (Time.timeScale == 1)
+        {
+            source.PlayOneShot(collisionSound, volume);
+        }
+    }
+
+    public void ActionSoundFX(AudioSource actionAudioSource, AudioClip actionSound, float volume)
+    {
+        if (Time.timeScale == 1)
+        {
+            actionAudioSource.volume = volume;
+            actionAudioSource.PlayOneShot(actionSound, volume);
+        }
+    }
+
+    public void InteractionSoundFX(AudioSource interactionAudioSource, AudioClip interactionAudioClip, float volume)
+    {
+        if (Time.timeScale == 1)
+        {
+            interactionAudioSource.PlayOneShot(interactionAudioClip, volume);
+        }
+    }
+    /*void SwordThrustAudio()
     {
         audioSource.pitch = 1;
         audioSource.volume = .1f;
@@ -36,5 +71,5 @@ public class SoundFXManager : MonoBehaviour
         audioSource.pitch = 1f;
         audioSource.volume = 1f;
         audioSource.PlayOneShot(walkSound);
-    }
+    }*/
 }
