@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
-using UnityEngine.Rendering;
-using System.Xml.Serialization;
 
 public class SoundFXManager : MonoBehaviour
 {
@@ -59,17 +56,4 @@ public class SoundFXManager : MonoBehaviour
             interactionAudioSource.PlayOneShot(interactionAudioClip, volume);
         }
     }
-    /*void SwordThrustAudio()
-    {
-        audioSource.pitch = 1;
-        audioSource.volume = .1f;
-        audioSource.PlayOneShot(swordThrust);
-    }
-
-    private void StepAudio()
-    {
-        audioSource.pitch = 1f;
-        audioSource.volume = 1f;
-        audioSource.PlayOneShot(walkSound);
-    }*/
 }
