@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: InteractionTextManagerSO
   m_EditorClassIdentifier: 
   npcName: Billy
-  npcDialogue: []
+  npcDialogue:
+  - Help! A witch doctor stole my face! He's behind this hill!

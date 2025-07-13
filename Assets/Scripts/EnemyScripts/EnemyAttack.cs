@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    EnemyInventory enemyInventory;
+
     [SerializeField] Transform target;
     [SerializeField] Transform weaponSlot;
 
     private float attackDistance;
+
     public bool canAttackPlayer {  get; private set; }
 
 
     private void Awake()
     {
-        
+        enemyInventory = GetComponent<EnemyInventory>();
     }
     // Update is called once per frame
     void Update()
     {
         //AttackTarget();
+        //enemyInventory.LoadWeaponDamageCOllider();
     }
 
     public void AttackTarget()
@@ -43,12 +47,12 @@ public class EnemyAttack : MonoBehaviour
 
     public void EnableWeaponCollider()
     {
-        weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
+        enemyInventory.OpenWeaponDamageCollider();
     }
 
     public void DisableWeaponCollider()
     {
-        weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
+        enemyInventory?.CloseWeaponDamageCollider();
 
     }
 }

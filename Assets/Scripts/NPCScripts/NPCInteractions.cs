@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Linq;
 using UnityEngine.Rendering.UI;
+using UnityEditor.Rendering;
 
 public class NPCInteractions : MonoBehaviour, IInteractables
 {
-    [SerializeField] int currentDialogue;
+    [SerializeField] int currentDialogueIndex;
     [SerializeField] int questCompleteDialogue;
     [SerializeField] bool isInteracting;
     [SerializeField] string interactionButtonText;
-    [SerializeField] string initialNpcDialogue;
 
     [SerializeField] List<string> newInteractionDialogue;
+    [SerializeField] List<string> characterDialogue;
     [SerializeField] InteractionTextManagerSO interactionTextManagerSO;
 
     public TextMeshProUGUI interactionDialogue;
@@ -21,15 +21,42 @@ public class NPCInteractions : MonoBehaviour, IInteractables
 
     private void Awake()
     {
-        interactionDialogue.text = interactionTextManagerSO.InitialMeetingDialogue(initialNpcDialogue);
-        currentDialogue = 0;
+        if(interactionTextManagerSO != null)
+        {
+            characterDialogue = interactionTextManagerSO.CharacterDialogue();
+            currentDialogueIndex = 0;
+        }
+        else
+        {
+            return;
+        }
+
+        //interactionTextManagerSO.dialogueBranchIndex = 0; // Just testing if logically works, and it does. Move to function on 'InteractionTextManagerSO' for organization
     }
-
-
     public virtual void Interact(Transform interactorTransform)
     {
+        characterDialogue = interactionTextManagerSO.CharacterDialogue();
 
         interactionTarget = interactorTransform;
+
+
+        if (!interactionDialogue.isActiveAndEnabled)
+        {
+            isInteracting = true;
+            currentDialogueIndex = 0;
+        }
+
+        if (currentDialogueIndex < characterDialogue.Count && interactionDialogue.enabled)
+        {
+            interactionDialogue.text = characterDialogue[currentDialogueIndex];
+            currentDialogueIndex++;
+        }
+        else if (currentDialogueIndex > characterDialogue.Count - 1 && interactionDialogue.isActiveAndEnabled)
+        {
+            //interactionTextManagerSO.BranchDialogue();
+            isInteracting = false;
+        }
+        /*interactionTarget = interactorTransform;
         if (interactionDialogue.IsActive() == false)
         {
             isInteracting = true;
@@ -44,13 +71,12 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         if(interactionDialogue.IsActive() == true && currentDialogue > interactionTextManagerSO.npcDialogue.Count)
         {
             isInteracting = false;
-        }
-
+        }*/
     }
 
     private void Update()
     {
-        SetNPCDialogue();
+        //SetNPCDialogue();
 
         if (interactionTarget != null)
         {
@@ -65,7 +91,7 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         }
     }
 
-    private void SetNPCDialogue()
+    /*private void SetNPCDialogue()
     {
         TryGetComponent(out QuestGiver questGiver);
         if(questGiver != null)
@@ -89,7 +115,7 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         {
             return;
         }
-    }
+    }*/
     public string GetInteractionText()
     {
         return interactionButtonText;

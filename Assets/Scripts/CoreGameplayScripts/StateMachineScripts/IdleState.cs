@@ -11,7 +11,7 @@ public class IdleState : State
         animator.CrossFade(clip.name, .2f);
     }
 
-    public override void StartState()
+    public override void PerformState()
     {
 
         if (!groundCheck.isGrounded)

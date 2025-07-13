@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dae91bda556ff4092168b7c093881c, type: 3}
+  m_Name: ArmingSword
+  m_EditorClassIdentifier: 
+  itemName: Arming Sword
+  itemID: 1
+  weaponModel: {fileID: 1657807658461107661, guid: 66dccf5f1e0c41a43969f4c63adc2a31,
+    type: 3}
+  isRightHandWeapon: 1
+  isLeftHandWeapon: 0
+  isEquipped: 1
+  weaponAnimationClip: {fileID: 7400000, guid: 0db51733c6b3ef74c9ccab8117c420ba, type: 2}
+  weaponDamage: 8

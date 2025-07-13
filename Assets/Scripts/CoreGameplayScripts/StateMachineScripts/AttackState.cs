@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    [SerializeField] AnimationClip clip;
+    [SerializeField] AnimationClip attackAnimationClip;
 
     public override void EnterState()
     {
-        animator.CrossFade(clip.name, .1f);
+        if(attackAnimationClip != null )
+        {
+            animator.CrossFade(attackAnimationClip.name, .1f);
+        }
+        else
+        {
+            return;
+        }
     }
 
-    public override void StartState()
+    public override void PerformState()
     {
         if (!groundCheck.isGrounded)
         {
@@ -22,5 +29,10 @@ public class AttackState : State
     public override void ExitState()
     {
 
+    }
+
+    public void SetAttackAnimation(AnimationClip attackAnimationClip)
+    {
+        this.attackAnimationClip = attackAnimationClip;
     }
 }

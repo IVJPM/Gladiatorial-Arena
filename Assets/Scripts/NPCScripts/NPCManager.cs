@@ -26,7 +26,7 @@ public class NPCManager : StateMachineController
     void Update()
     {
         SetCharacterState();
-        stateMachine.state.StartState();
+        stateMachine.state.PerformState();
     }
 
     private void SetCharacterState()

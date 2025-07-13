@@ -20,8 +20,15 @@ public  class KillQuestGoal : QuestBaseInfo
     public override void BeginQuest()
     {
         base.BeginQuest();
-        EnemyTakeDamage.OnEnemyDeath += EnemyTakeDamage_OnEnemyDeath;
+        EnemyStats.OnEnemyDeath += EnemyStats_OnEnemyDeath;
     }
+
+    private void EnemyStats_OnEnemyDeath(object sender, System.EventArgs e)
+    {
+        EnemyKilled(enemyName);
+        Debug.Log(enemyName + " killed");
+    }
+
     private void EnemyTakeDamage_OnEnemyDeath(object sender, System.EventArgs e)
     {
         EnemyKilled(enemyName);
@@ -35,7 +42,6 @@ public  class KillQuestGoal : QuestBaseInfo
         {
              this.currentGoalAmount++;
             EvaluateQuestStatus();
-            Debug.Log(currentGoalAmount);
         }
     }
 

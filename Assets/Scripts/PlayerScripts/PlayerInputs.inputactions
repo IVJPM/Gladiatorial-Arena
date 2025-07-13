@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PlayerDodge",
+                    "type": "Button",
+                    "id": "068d77ef-6891-490e-8e65-62836b3a2735",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -125,6 +134,17 @@
                     "action": "PlayerMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "027c96fd-faa3-4021-bd58-69648f9b7d6c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerDodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -136,16 +156,71 @@
                     "name": "CameraMovement",
                     "type": "PassThrough",
                     "id": "0d385b2f-09c7-4403-bf4d-78508fc18f4e",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
+                    "name": "KeyBoard",
+                    "id": "b664ab70-b613-49e0-8a51-622bbe40dde6",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0.001,y=0.001)",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Up",
+                    "id": "55970474-ecfe-4865-9e73-b2e4a2f38869",
+                    "path": "<Mouse>/delta/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "0b069286-3ea7-4e46-8a5d-65ca2fcb5b27",
+                    "path": "<Mouse>/delta/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "58842e4e-98b9-4440-8d65-d3016b958105",
+                    "path": "<Mouse>/delta/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "db879954-d1a0-4e5e-a2c2-67b29f8de81a",
+                    "path": "<Mouse>/delta/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "RightAnalogStick",
-                    "id": "9f2dbcfd-8371-4383-a852-dbd8d31f5133",
+                    "id": "a18b385a-f8bb-4f17-8ecf-5105e85ce3e5",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
@@ -156,7 +231,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "771f1335-cb5f-4c9a-9a92-996c0e2b9ff5",
+                    "id": "94a8e66c-30b9-432e-b99d-27670c399253",
                     "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
@@ -167,7 +242,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "c4016f7a-ee54-432f-83ee-f1ab58cc8b27",
+                    "id": "bd14d4ca-bd03-4e32-9595-194903ebf14e",
                     "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
@@ -178,7 +253,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "c099590f-b8bd-4c02-acef-425a612732da",
+                    "id": "4900104a-693c-4498-8321-09e61a22cef9",
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
@@ -189,63 +264,8 @@
                 },
                 {
                     "name": "right",
-                    "id": "f577df91-df60-4350-aaa5-5fe53c83eef7",
+                    "id": "c922f67b-55fb-431e-9882-9c8b34487859",
                     "path": "<Gamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "KeyBoard",
-                    "id": "b664ab70-b613-49e0-8a51-622bbe40dde6",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMovement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "6a49f5f1-6646-42ee-b038-0d47cd715636",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "9f213053-72b2-4b57-86fc-69e86dfd0392",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "c30f7d0f-b33d-416f-9f05-bf7a6e52417a",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "7dfd9ee1-ccf6-4b7a-ae26-f4fcadabc2b3",
-                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -266,7 +286,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -284,7 +304,7 @@
                 {
                     "name": "",
                     "id": "a956fb1f-d73d-4486-a763-417308d24d7d",
-                    "path": "<Keyboard>/space",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -305,7 +325,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -341,7 +361,7 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "60f7b20d-aa18-412b-8c49-c29bd06446fb",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
