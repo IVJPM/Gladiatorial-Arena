@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : StateMachineController
+public class EnemyManager : CharacterManager
 {
     [Header("Character States")]
     public State idleState; //Try [SerializeField] after making sure this works
@@ -15,6 +15,7 @@ public class EnemyManager : StateMachineController
 
 
     EnemyMovement enemyMovement;
+    EnemyStats enemyStats;
     EnemyAttack enemyAttack;
 
     [SerializeField] HpManagerSO hpManagerSO;
@@ -22,6 +23,7 @@ public class EnemyManager : StateMachineController
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
+        enemyStats = GetComponent<EnemyStats>();
         enemyAttack = GetComponent<EnemyAttack>();
 
         SetUpStateInstances();
@@ -32,7 +34,7 @@ public class EnemyManager : StateMachineController
     void Update()
     {
         SetCharacterState();
-        stateMachine.state.StartState();
+        stateMachine.state.PerformState();
     }
 
 
@@ -46,7 +48,7 @@ public class EnemyManager : StateMachineController
     {
         if (groundCheck.isGrounded)
         {
-            if (enemyMovement.chasingPlayer == false && hpManagerSO.HP != 0)
+            if (enemyMovement.chasingPlayer == false && enemyStats.currentHealth != 0)
             {
                 if (enemyAttack.canAttackPlayer == true)
                 {
@@ -57,12 +59,12 @@ public class EnemyManager : StateMachineController
                     stateMachine.Set(idleState);
                 }
             }
-            else if (enemyMovement.chasingPlayer == true && hpManagerSO.HP != 0)
+            else if (enemyMovement.chasingPlayer == true && enemyStats.currentHealth != 0)
             {
                 enemyMovement.enemyRunSpeed = chasePlayerSpeed;
                 stateMachine.Set(runState);
             }
-            else if(hpManagerSO.HP <= 0)
+            else if(enemyStats.currentHealth <= 0)
             {
                 stateMachine.Set(deathState);
                 StartCoroutine(DestroyEnemy());

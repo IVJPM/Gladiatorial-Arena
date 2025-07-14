@@ -14,14 +14,16 @@ public class PlayerInputManager : MonoBehaviour
     public float moveAmount;
     public bool attackInput;
     public bool interact = false;
+    public bool isDodging;
 
     [Header("Camera Movment Inputs")]
     public float cameraHorizontalInput;
     public float cameraVerticalInput;
-    Vector2 camRot;
+    public Vector2 camRot;
 
     public event EventHandler OnInteract;
     public event EventHandler OnPause;
+    public event EventHandler OnDodge;
 
     // Start is called before the first frame update
     void Start()
@@ -42,13 +44,21 @@ public class PlayerInputManager : MonoBehaviour
         {
             playerInputs = new PlayerInputs();
             playerInputs.PlayerMovement.PlayerMovement.performed += i => moveInput = i.ReadValue<Vector2>();
+            playerInputs.PlayerMovement.PlayerDodge.performed += PlayerDodge_performed; ;
+
             playerInputs.CameraMovement.CameraMovement.performed += i => camRot = i.ReadValue<Vector2>();
+            playerInputs.CameraMovement.CameraMovement.canceled += i => camRot = Vector2.zero;
             playerInputs.AttackInputs.AttackInputs.performed += i => attackInput = true;
             playerInputs.InteractionInput.InteractionInput.performed += Interactable_performed;
             playerInputs.PauseMenu.Pause.performed += Pause_performed;
         }
 
         playerInputs.Enable();
+    }
+
+    private void PlayerDodge_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnDodge?.Invoke(this, EventArgs.Empty);
     }
 
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

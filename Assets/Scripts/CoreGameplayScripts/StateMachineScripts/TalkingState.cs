@@ -11,7 +11,7 @@ public class TalkingState : State
         animator.CrossFade(clip.name, .1f);
     }
 
-    public override void StartState()
+    public override void PerformState()
     {
         if (!groundCheck.isGrounded)
         {

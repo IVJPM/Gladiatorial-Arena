@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    [SerializeField] PlayerInputManager playerInputManager;
     public Camera camObject;
-    PlayerInputManager playerInputManager;
 
     [SerializeField] Transform cameraPivotTransform;
 
     [Header("Camera Settings")]
-    private float cameraSmoothSpeed = .25f;
-    private float upDownRotationSpeed = 40;
-    private float leftRightRotationSpeed = 50;
+    public float cameraSmoothSpeed = .25f;
+    public float upDownRotationSpeed = 100;
+    public float leftRightRotationSpeed = 100;
     [SerializeField] float minPivot = -20; // Lowest point to look down
     [SerializeField] float maxPivot = 40; // Highest point to look up
     [SerializeField] float cameraCollisionOffset = .2f;
@@ -30,6 +27,9 @@ public class CameraControls : MonoBehaviour
     public float cameraVerticalInput;
     private float defaultCameraPosition;
     private float targetCameraPosition;
+
+
+
 
 
     //private void Awake()
@@ -50,7 +50,7 @@ public class CameraControls : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         defaultCameraPosition = camObject.transform.localPosition.z;
-        playerInputManager = GameObject.Find("Player").GetComponent<PlayerInputManager>();
+        //playerInputManager = GameObject.Find("Player").GetComponent<PlayerInputManager>();
     }
 
     private void LateUpdate()
@@ -62,10 +62,12 @@ public class CameraControls : MonoBehaviour
         }
     }
 
-    
+     
+
+
     public void HandleCameraActions()
     {
-        if (player != null)
+        if (playerInputManager != null)
         {
             FollowTarget();
             HandleCameraRotations();
@@ -75,32 +77,34 @@ public class CameraControls : MonoBehaviour
 
     private void FollowTarget()
     {
-        Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+        Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, playerInputManager.transform.position, ref cameraVelocity, cameraSmoothSpeed );
+        //Vector3 targetCameraPosition = Vector3.Lerp(transform.position, playerInputManager.transform.position, .5f);
         transform.position = targetCameraPosition;
        
     }
 
     private void HandleCameraRotations()
     {
-        leftRightLookAngle -= (playerInputManager.cameraVerticalInput * leftRightRotationSpeed) * Time.deltaTime;
-        upDownLookAngle += (playerInputManager.cameraHorizontalInput * upDownRotationSpeed) * Time.deltaTime;
+
+        leftRightLookAngle += (playerInputManager.cameraVerticalInput * leftRightRotationSpeed) * Time.smoothDeltaTime;
+        upDownLookAngle += (playerInputManager.cameraHorizontalInput * upDownRotationSpeed) * Time.smoothDeltaTime;
 
         upDownLookAngle = Mathf.Clamp(upDownLookAngle, minPivot, maxPivot);
 
         Vector3 cameraRotation = Vector3.zero;
         cameraRotation.y = leftRightLookAngle;
         Quaternion targetRotation = Quaternion.Euler(cameraRotation);
-        transform.rotation = targetRotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1f);
 
         cameraRotation = Vector3.zero;
         cameraRotation.x = upDownLookAngle;
         targetRotation = Quaternion.Euler(cameraRotation);
-        cameraPivotTransform.localRotation = targetRotation;
+        cameraPivotTransform.localRotation = Quaternion.Slerp(cameraPivotTransform.localRotation, targetRotation, 1f);
     }
 
     private void HandleCameraCollisions()
     {
-        targetCameraPosition = defaultCameraPosition;
+        targetCameraPosition = defaultCameraPosition + .5f;
         RaycastHit hit;
         Vector3 direction = camObject.transform.position - cameraPivotTransform.position;
         direction.Normalize();

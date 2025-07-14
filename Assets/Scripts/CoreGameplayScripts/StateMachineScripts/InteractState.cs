@@ -9,7 +9,7 @@ public class InteractState : State
 
     }
 
-    public override void StartState()
+    public override void PerformState()
     {
 
     }

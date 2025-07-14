@@ -2,71 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttacks : State
+public class PlayerAttacks : MonoBehaviour
 {
     PlayerInputManager playerInputManager;
 
     public float attackReset;
     private bool canAttack;
-    [SerializeField] Transform weaponSlot;
-    IWeapons weapon;
 
+    [SerializeField] GameObject weaponObject;
+    [SerializeField] AnimationClip attackAnimaton;
+    [SerializeField] WeaponItemSO playerWeapon;
+    [SerializeField] AttackState playerAttackState;
+    [SerializeField] WeaponDamageCollider weaponDamageCollider;
+    PlayerEquipmentManager equipmentManager;
     // Start is called before the first frame update
     void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
+        equipmentManager = GetComponent<PlayerEquipmentManager>();
     }
 
-    public void SwordSwing()
+    private void Update()
     {
+        // weaponObject = equipmentManager.GetCurrentWeapon();
+        PlayerAttack();
+        
+    }
+    public void PlayerAttack()
+    {
+        playerWeapon = equipmentManager.GetCurrentWeapon();
+        weaponObject = equipmentManager.GetCurrentEquippedWeapon();
 
-        if (playerInputManager.attackInput == true)
+        if(playerWeapon != null)
         {
-            //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
-            attackReset += 15 * Time.deltaTime;
-            //animator.SetLayerWeight(layerIndex, layerWeight);
-            //animator.SetBool("oneHandedThrust", true);
+            attackAnimaton = playerWeapon.weaponAnimationClip;
+            playerAttackState.SetAttackAnimation(attackAnimaton);
+        }
+        else
+        {
+            return;
+        }
+        
+        if (playerInputManager.attackInput == true && playerWeapon != null)
+        {
+            attackReset += Time.deltaTime;
 
-            if (attackReset >= 11f)
+            if (attackReset >= attackAnimaton.length * .55f)
             {
                 playerInputManager.attackInput = false;
             }
         }
-        else if (playerInputManager.attackInput == false)
+        else if (playerInputManager.attackInput == false || playerWeapon == null)
         {
-            //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
-            //animator.SetLayerWeight(layerIndex, 0);
-            //animator.SetBool("oneHandedThrust", false);
             attackReset = 0;
+            return;
         }
     }
 
-    public void EnableWeaponsCollider()
+    public void EnableDamageCollider()
     {
-        if (weaponSlot.GetChild(0).TryGetComponent(out weapon))
-        {
-            weapon.EnableWeaponCollider();
-            Debug.Log("Swing");
-        }
-        else if (weaponSlot.GetChild(0) == null)
-        {
-            Debug.Log("No swing");
-            return;
-        }
-        //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
+        weaponDamageCollider = weaponObject.GetComponentInChildren<WeaponDamageCollider>();
+        weaponDamageCollider.gameObject.GetComponent<Collider>().enabled = true;
     }
 
-    public void DisableWeaponsCollider()
+    public void DisableDamageCollider()
     {
-        if (weaponSlot.GetChild(0).TryGetComponent(out weapon))
-        {
-            weapon.DisableWeaponCollider();
-        }
-        else if (weaponSlot.GetChild(0) == null)
-        {
-            return;
-        }
-        //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
-
+        weaponDamageCollider = weaponObject.GetComponentInChildren<WeaponDamageCollider>();
+        weaponDamageCollider.gameObject.GetComponent<Collider>().enabled = false;
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -11,77 +10,50 @@ public class InteractionTextManagerSO : ScriptableObject
 {
     [Header("Dialogue Options")]
     [SerializeField] string npcName;
-   // [field: SerializeField] public string dialogueOptions {  get; private set; }
+    public List<string> greetingDialogue;
+    // [field: SerializeField] public string dialogueOptions {  get; private set; }
     [TextArea(3, 10)]
-    public List<string> npcDialogue;
+    public List<string> characterDialogue;
+    public List<NPCDialogueBranches> npcDialogue;
 
 
-
-    /*[SerializeField] TextMeshProUGUI textMeshProDialogue;
-    [SerializeField] string npcName;
-    [SerializeField] PlayerInputManager playerInputManager;
-
-
-    [Header("Dialogue Options")]
-    [SerializeField] int maxDialogueChoices;
-    [SerializeField] int increaseMaxDialogueChoices;
-    [SerializeField] List<string> dialogueChoices = new List<string>();
-    [SerializeField] List<int> setsOfDialogue = new List<int>();
-    private int currentSetOfDialogue;
-    [SerializeField] int currentDialogueChoice;
-    //[SerializeField]string[,] dialogueOptions;*/
-   
-    public string InitialMeetingDialogue(string initialDialogue)
-    {
-        if(npcDialogue.Count > 0)
-        {
-            npcDialogue.Clear();
-        }
-        npcDialogue.Add(initialDialogue);
-        return initialDialogue;
-    }
+    public int dialogueBranchIndex = 0;
 
     public List<string> AdjustDialogueOptions(List<string> dialogueOptions)
     {
-        //npcDialogue.AddRange(dialogueOptions);
         return dialogueOptions;
     }
-    public void CharacterDialogue()
-    {
-        //npcDialogue = new List<string>();
 
-       /* if(Vector3.Distance(player.position, npc.transform.position) < 1)
+    public List<string> CharacterDialogue()
+    {
+        characterDialogue = greetingDialogue;
+        GrabCurrentDialogueBranch();
+
+        foreach(NPCDialogueBranches dialogueBranches in npcDialogue)
         {
-            Debug.Log("not null");
-            for (int i = 0; i < setsOfDialogue.Count; i++)
+            if(dialogueBranches.condition != null)
             {
-                dialogueChoices.Capacity = maxDialogueChoices;
-                if (i == setsOfDialogue[0])
-                {
-                    if (currentDialogueChoice < dialogueChoices.Count)
-                    {
-                        for (int j = currentDialogueChoice; j < maxDialogueChoices; j++)
-                        {
-                            textMeshProDialogue.text = dialogueChoices[j];
-                            Debug.Log(textMeshProDialogue.text);
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        // Try making a new script and using [System.Serializable]!!!!
-                        currentDialogueChoice = -1;
-                    }
-                }
+                dialogueBranches.DialogueCondition();
+            }
+            else
+            {
+                characterDialogue = greetingDialogue;
             }
         }
-        else if(Vector3.Distance(player.position, npc.transform.position) > 1)
-        {
-            currentDialogueChoice = -1;
-            Debug.Log("null");
-        }
-        currentDialogueChoiceNPC*/
+        return characterDialogue;
+    }
 
-        //return npcDialogue[0].ToString();
+
+    private void GrabCurrentDialogueBranch()
+    {
+        foreach(NPCDialogueBranches branch in npcDialogue)
+        {
+            branch.SetDialogueBranchParent(this);
+        }
+    }
+
+    public void SetDialoguBranch(NPCDialogueBranches branch)
+    {
+        characterDialogue = branch.dialogue;
     }
 }

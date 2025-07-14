@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a88113721a1ca4b800a9d35ddd7131, type: 3}
   m_Name: ArenaMasonInteractionText
   m_EditorClassIdentifier: 
-  npcName: 
-  npcDialogue: []
+  npcName: Arena Mason
+  npcDialogue:
+  - Welcome! Are you ready to test your skills?

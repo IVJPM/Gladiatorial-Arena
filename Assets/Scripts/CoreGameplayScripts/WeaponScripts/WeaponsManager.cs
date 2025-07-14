@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class WeaponsManager : MonoBehaviour
 {
-    public static WeaponsManager instance;
-
-    [SerializeField] List<GameObject> weapons = new List<GameObject>();
-    public IReadOnlyList<GameObject> Weapon => weapons;
+    [SerializeField] WeaponDamageCollider damageCollider;
+    public WeaponItemSO weaponItem;
 
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else if(instance != this)
-        {
-            Destroy(instance);
-        }
+        
     }
 
     // Start is called before the first frame update
@@ -31,5 +22,15 @@ public class WeaponsManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetWeaponDamage(WeaponItemSO weaponItem)
+    {
+        damageCollider.weaponDamage = weaponItem.weaponDamage;
+    }
+
+    public void GetWeaponItem(WeaponItemSO weapon)
+    {
+        weaponItem = weapon;
     }
 }

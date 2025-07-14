@@ -7,6 +7,7 @@ public class SwordManager : MonoBehaviour, IWeapons
     new Collider collider;
 
     [SerializeField] int baseSwordDamage;
+    [SerializeField] GameObject swordWeaponModel;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +27,11 @@ public class SwordManager : MonoBehaviour, IWeapons
 
     public void EnableWeaponCollider()
     {
-        collider.enabled = true;
+        swordWeaponModel.GetComponent<Collider>().enabled = true;
     }
 
     public void DisableWeaponCollider()
     {
-        collider.enabled = false;
+        swordWeaponModel.GetComponent<Collider>().enabled = false;
     }
 }

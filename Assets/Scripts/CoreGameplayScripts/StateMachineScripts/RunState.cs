@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +11,7 @@ public class RunState : State
         animator.CrossFade(clip.name, .1f);
     }
 
-    public override void StartState()
+    public override void PerformState()
     {
         if (!groundCheck.isGrounded)
         {

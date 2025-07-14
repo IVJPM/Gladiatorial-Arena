@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : StateMachineController
+public class PlayerManager : CharacterManager
 {
     PlayerInputManager playerInputManager;
     PlayerMovement playerMovement;
@@ -12,6 +12,7 @@ public class PlayerManager : StateMachineController
     public State idleState; //Try [SerializeField] after making sure this works
     public State runState;
     public State attackState;
+    public State dodgeState;
 
     [SerializeField] float playerMovementSpeed = 7;
     [SerializeField] float stopMovement = 0;
@@ -32,13 +33,12 @@ public class PlayerManager : StateMachineController
     private void Update()
     {
         SetCharacterState();
-        stateMachine.state.StartState();
+        stateMachine.state.PerformState();
     }
 
     void FixedUpdate()
     {
-        playerMovement.HandleMovement();
-        playerAttacks.SwordSwing();
+        
     }
 
     private void PlayerInputManager_OnPause(object sender, System.EventArgs e)
@@ -67,21 +67,25 @@ public class PlayerManager : StateMachineController
 
     private void SetCharacterState()
     {
-        if (groundCheck.isGrounded)
+        if (playerMovement.CheckIfGrounded() || playerMovement.OnSlope())
         {
-            if (playerInputManager.moveInput == Vector2.zero && playerInputManager.attackInput != true)
+            if (playerInputManager.moveInput == Vector2.zero && playerInputManager.attackInput != true && !playerMovement.isDodging)
             {
                 stateMachine.Set(idleState);
             }
-            else if(playerInputManager.moveInput != Vector2.zero && playerInputManager.attackInput != true)
+            else if(playerInputManager.moveInput != Vector2.zero && playerInputManager.attackInput != true && !playerMovement.isDodging)
             {
                 playerMovement.movementSpeed = playerMovementSpeed;
                 stateMachine.Set(runState);
             }
-            else if (playerInputManager.attackInput == true)
+            else if (playerInputManager.attackInput == true && !playerMovement.isDodging)
             {
                 playerMovement.movementSpeed = stopMovement;   
                 stateMachine.Set(attackState);
+            }
+            else if(playerMovement.isDodging && !playerInputManager.attackInput)
+            {
+                stateMachine.Set(dodgeState);
             }
         }
     }

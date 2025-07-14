@@ -22,7 +22,7 @@ public abstract class State : MonoBehaviour
 
     public virtual void EnterState() { }
 
-    public virtual void StartState() { }
+    public virtual void PerformState() { }
 
     public virtual void ExitState() { }
 

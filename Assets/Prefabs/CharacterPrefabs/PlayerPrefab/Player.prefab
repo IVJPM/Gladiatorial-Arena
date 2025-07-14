@@ -977,6 +977,37 @@ Transform:
   - {fileID: 4061306962281006213}
   m_Father: {fileID: 6092987034561765246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1535314804458957341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 405701408140392573}
+  m_Layer: 3
+  m_Name: ShinCastDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &405701408140392573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535314804458957341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3244691087426676764}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782702501690864755
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1028,7 @@ GameObject:
   - component: {fileID: 7809847437614859584}
   - component: {fileID: 4579762165140474211}
   - component: {fileID: 2926526392240333162}
+  - component: {fileID: 3948652330236359040}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1084,9 +1116,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!136 &6756104301003037640
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1128,9 +1160,13 @@ MonoBehaviour:
   moveAmount: 0
   moveInput: {x: 0, y: 0}
   move: {x: 0, y: 0, z: 0}
-  gravityModifier: 1
+  gravityModifier: 12
   movementSpeed: 7
   resetMovementSpeed: 0
+  shin: {fileID: 405701408140392573}
+  groundedMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &6099550172213280215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1187,7 @@ MonoBehaviour:
   interact: 0
   cameraHorizontalInput: 0
   cameraVerticalInput: 0
+  camRot: {x: 0, y: 0}
 --- !u!82 &4137236746268126842
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1163,7 +1200,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1281,7 +1318,7 @@ MonoBehaviour:
   idleState: {fileID: 7008045699904110324}
   runState: {fileID: 5461862982505570566}
   attackState: {fileID: 7640626472408047113}
-  playerMovementSpeed: 7
+  playerMovementSpeed: 450
   stopMovement: 0
   pauseGame: {fileID: 0}
 --- !u!114 &4579762165140474211
@@ -1313,6 +1350,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponManagerSO: {fileID: 11400000, guid: 679cd2e50d53526428d891e51541a2a3, type: 2}
   hpManagerSO: {fileID: 11400000, guid: d484886dbf374c947b9e4f22929af9d3, type: 2}
+--- !u!114 &3948652330236359040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a163eaf3b6f74541981e0637e0e5359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runSound: {fileID: 8300000, guid: fdfa07727ba18e146b0d737f16110ba5, type: 3}
+  swordSwing: {fileID: 8300000, guid: 5783b1b5cb64da443882c74d832842cf, type: 3}
 --- !u!1 &1789272960074739661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3932,7 +3983,7 @@ Transform:
   m_GameObject: {fileID: 5814845182013857403}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.09000076}
+  m_LocalPosition: {x: 0, y: 1.18, z: 0.09000076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4437,7 +4488,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0.09000076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 405701408140392573}
   m_Father: {fileID: 6852830655199511164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &4917701622192142817
@@ -6454,6 +6506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106660700582241629, guid: 92f8b959128871b40a304c49de4a5fb3,
+        type: 3}
+      propertyPath: baseSwordDamage
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

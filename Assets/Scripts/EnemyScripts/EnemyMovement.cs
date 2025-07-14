@@ -46,8 +46,8 @@ public class EnemyMovement : MonoBehaviour
             
             transform.LookAt(targetPosition);
 
-            enemyRB.velocity = (transform.position - targetPosition);
-            transform.position -= enemyRB.velocity * enemyRunSpeed * Time.deltaTime;
+            enemyRB.linearVelocity = (transform.position - targetPosition);
+            transform.position -= enemyRB.linearVelocity * enemyRunSpeed * Time.deltaTime;
         }
         else
         {
