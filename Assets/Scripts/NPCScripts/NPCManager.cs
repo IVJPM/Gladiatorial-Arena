@@ -6,19 +6,27 @@ using UnityEngine.InputSystem;
 public class NPCManager : StateMachineController
 {
     NPCInteractions npcInteractions;
+    NPCPatrol npcPatrol;
 
     [Header("Character States")]
     public State idleState; //Try [SerializeField] after making sure this works
-    public State runState;
-    public State attackState;
     public State talkingState;
+    public State patrolState;
 
     // Start is called before the first frame update
     void Start()
     {
         npcInteractions = GetComponent<NPCInteractions>();
+        if(npcInteractions != null )
+        {
+            npcPatrol = GetComponent<NPCPatrol>();
+        }
+        else
+        {
+            return;
+        }
 
-        SetUpStateInstances();
+            SetUpStateInstances();
         stateMachine.Set(idleState);
     }
 
@@ -37,7 +45,11 @@ public class NPCManager : StateMachineController
             {
                 stateMachine.Set(talkingState);
             }
-            else
+           else if(npcPatrol != null && npcInteractions.IsInteracting() == false)
+            {
+                stateMachine.Set(patrolState);
+            }
+           else
             {
                 stateMachine.Set(idleState);
             }

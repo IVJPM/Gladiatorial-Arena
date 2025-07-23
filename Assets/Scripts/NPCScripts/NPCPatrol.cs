@@ -1,17 +1,27 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class NPCPatrol : MonoBehaviour
 {
-    [field: SerializeField] public Transform target { get; private set; }
+    //[field: SerializeField] public Transform target { get; private set; }
     [SerializeField] Animator characterAnimation;
-    [SerializeField] AnimationClip moveClip;
+    [SerializeField] AnimationClip walkClip;
     [SerializeField] AnimationClip idleClip;
+
+    [SerializeField] Transform shin;
+    [SerializeField] LayerMask groundedMask;
+    [SerializeField] LayerMask slopeMask;
+
+    RaycastHit groundedCastHit;
+    public NavMeshAgent navMeshAgent;
 
     public Vector3 patrolPosition;
     public Vector3 patrol;
     public Transform[] patrolPoint;
-    [SerializeField] Vector2 collisionPosition;
 
     Vector3 targetPosition;
     Vector3 newPosition;
@@ -23,13 +33,14 @@ public class NPCPatrol : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(PatrolPosition());
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        //StartCoroutine(PatrolPosition());
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleCharacterMovement();
+        //HandleCharacterMovement();
     }
 
     public void HandleCharacterMovement()
@@ -38,28 +49,40 @@ public class NPCPatrol : MonoBehaviour
 
         newPosition = targetPosition - patrolPosition;
 
-        if (Vector3.Distance(patrolPosition, targetPosition) > 2f && patrolling)
+        if (Vector3.Distance(patrolPosition, targetPosition) > 2f && patrolling && navMeshAgent.isStopped == false)
         {
-            newPosition = newPosition.normalized;
-            transform.position = Vector3.SmoothDamp(patrolPosition, targetPosition, ref velocity, .5f, 2);
-            
-            Quaternion rotate = Quaternion.LookRotation(newPosition);
-            Quaternion smoothRotate = Quaternion.Slerp(transform.rotation, rotate, .15f);
-            transform.rotation = smoothRotate;
+                newPosition = newPosition.normalized;
+                /*transform.position = Vector3.SmoothDamp(patrolPosition, targetPosition, ref velocity, .5f, 2);
+
+                Quaternion rotate = Quaternion.LookRotation(newPosition);
+                Quaternion smoothRotate = Quaternion.Slerp(transform.rotation, rotate, .05f);
+                transform.rotation = smoothRotate;*/
+
+            navMeshAgent.destination = targetPosition;
+
+            if (!characterAnimation.GetNextAnimatorStateInfo(0).IsName(walkClip.name))
+            {
+                AnimationsManager.instance.PlayAnimation(characterAnimation, walkClip, .1f);
+            }
         }
-        else if (Vector3.Distance(patrolPosition, targetPosition) <= 2f)
+        else if (Vector3.Distance(patrolPosition, targetPosition) <= 2f || !NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
         {
-            print("p");
             StartCoroutine(PatrolPosition());
         }
     }
+   
 
-
-    IEnumerator PatrolPosition()
+public IEnumerator PatrolPosition()
     {
         int patrolIndex;
         patrolling = false;
-        
+        navMeshAgent.isStopped = true;
+
+        if (!characterAnimation.GetNextAnimatorStateInfo(0).IsName(idleClip.name))
+        {
+            AnimationsManager.instance.PlayAnimation(characterAnimation, idleClip, .1f);
+        }
+
         for (int i = 0; i < patrolPoint.Length; i++)
         {
             patrolIndex = Random.Range(0, patrolPoint.Length);
@@ -67,7 +90,7 @@ public class NPCPatrol : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2);
+        navMeshAgent.isStopped = false;
         patrolling = true;
-        Debug.Log(targetPosition);
     }
 }
