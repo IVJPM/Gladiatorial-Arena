@@ -8,7 +8,10 @@ public class IdleState : State
 
     public override void EnterState()
     {
-        animator.CrossFade(clip.name, .2f);
+        if (!animator.GetNextAnimatorStateInfo(0).IsName(clip.name))
+        {
+            AnimationsManager.instance.PlayAnimation(animator, clip, .1f);
+        }
     }
 
     public override void PerformState()
