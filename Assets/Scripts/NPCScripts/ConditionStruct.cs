@@ -2,10 +2,13 @@ using UnityEngine;
 
 public struct ConditionStruct
 {
-    ConditionInformation conditionInformation;
-
-    public void CreateCondition()
+    public void CreateCondition(DialogueConditionTest conditionInformation, KeyCode characterReply)
     {
-        Debug.Log("c");
+        if (Input.GetKeyDown(characterReply))
+        {
+            Debug.Log(characterReply);
+            conditionInformation.conditionMet = true;
+        }
+
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LightRotation : MonoBehaviour
 {
+    [SerializeField] Terrain terrain;
+    [SerializeField] float lightAngle;
     void Start()
     {
 
@@ -10,6 +12,6 @@ public class LightRotation : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.up * .25f * Time.deltaTime);
+        transform.RotateAround(terrain.transform.position, Vector3.up, lightAngle);
     }
 }

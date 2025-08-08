@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ConditionInformation : DialogueConditionTest
 {
+    //public char characterReply;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,7 +18,17 @@ public class ConditionInformation : DialogueConditionTest
 
     public override void CreateDialogueCondition()
     {
-        ConditionStruct condition = new ConditionStruct();
-        condition.CreateCondition();
+        base.CreateDialogueCondition();
+        
+        if(conditionMet == false)
+        {
+            conditionMet = true;
+        }
+        else
+        {
+            conditionMet = false;
+        }
+        /*ConditionStruct condition = new ConditionStruct();
+        condition.CreateCondition(this);*/
     }
 }

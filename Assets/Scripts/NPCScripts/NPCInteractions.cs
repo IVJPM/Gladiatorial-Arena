@@ -30,8 +30,6 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         {
             return;
         }
-
-        //interactionTextManagerSO.dialogueBranchIndex = 0; // Just testing if logically works, and it does. Move to function on 'InteractionTextManagerSO' for organization
     }
     public virtual void Interact(Transform interactorTransform)
     {
@@ -54,7 +52,13 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         else if (currentDialogueIndex > characterDialogue.Count - 1 && interactionDialogue.isActiveAndEnabled)
         {
             //interactionTextManagerSO.BranchDialogue();
+            currentDialogueIndex = 0;
             isInteracting = false;
+        }
+
+        if(currentDialogueIndex == interactionTextManagerSO.npcDialogue[1].conditionIndex)
+        {
+            interactionTextManagerSO.npcDialogue[1].EnableCondition(interactionTextManagerSO.npcDialogue[1].conditionIndex);
         }
         /*interactionTarget = interactorTransform;
         if (interactionDialogue.IsActive() == false)

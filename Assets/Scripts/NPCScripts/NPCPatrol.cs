@@ -22,6 +22,7 @@ public class NPCPatrol : MonoBehaviour
     public Vector3 patrolPosition;
     public Vector3 patrol;
     public Transform[] patrolPoint;
+    public int patrolTimer;
 
     Vector3 targetPosition;
     Vector3 newPosition;
@@ -49,7 +50,7 @@ public class NPCPatrol : MonoBehaviour
 
         newPosition = targetPosition - patrolPosition;
 
-        if (Vector3.Distance(patrolPosition, targetPosition) > 2f && patrolling && navMeshAgent.isStopped == false)
+        if (Vector3.Distance(patrolPosition, targetPosition) > .1f && patrolling && navMeshAgent.isStopped == false)
         {
                 newPosition = newPosition.normalized;
                 /*transform.position = Vector3.SmoothDamp(patrolPosition, targetPosition, ref velocity, .5f, 2);
@@ -65,7 +66,7 @@ public class NPCPatrol : MonoBehaviour
                 AnimationsManager.instance.PlayAnimation(characterAnimation, walkClip, .1f);
             }
         }
-        else if (Vector3.Distance(patrolPosition, targetPosition) <= 2f || !NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
+        else if (Vector3.Distance(patrolPosition, targetPosition) <= .1f || !NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
         {
             StartCoroutine(PatrolPosition());
         }
@@ -89,7 +90,7 @@ public IEnumerator PatrolPosition()
             targetPosition = new Vector3(Random.Range(transform.position.x, patrolPoint[patrolIndex].position.x), 0, Random.Range(transform.position.z, patrolPoint[patrolIndex].position.z));
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(Random.Range(0, patrolTimer));
         navMeshAgent.isStopped = false;
         patrolling = true;
     }
