@@ -18,4 +18,5 @@ MonoBehaviour:
   characterDialogue:
   - Good day!
   npcDialogue: []
+  currentActiveDialogue: {fileID: 0}
   dialogueBranchIndex: 0

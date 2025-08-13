@@ -35,13 +35,12 @@ public class NPCPatrol : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        //StartCoroutine(PatrolPosition());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //HandleCharacterMovement();
+        
     }
 
     public void HandleCharacterMovement()

@@ -23,9 +23,6 @@ public class NPCDialogueBranches : ScriptableObject
     {
         conditionFulfilled = condition.conditionMet;
 
-        /*ConditionStruct conditionStruct = new ConditionStruct();
-        conditionStruct.CreateCondition(condition, condition.characterReply);*/
-
         if (conditionFulfilled)
         {
             dialogueManager.SetDialoguBranch(this);
@@ -34,12 +31,32 @@ public class NPCDialogueBranches : ScriptableObject
 
     public void EnableCondition(int dialogueIndex)
     {
-        for (dialogueIndex = 0; dialogueIndex < dialogue.Count; dialogueIndex++)
+        if(condition != null)
         {
-            if (dialogueIndex == dialogue.Count - 1)
+            for (dialogueIndex = 0; dialogueIndex < dialogue.Count; dialogueIndex++)
             {
-                Debug.Log("I'm done talking now");
+                if (dialogueIndex == conditionIndex - 1)
+                {
+                    condition.enabled = true;
+                    Debug.Log("I'm done talking now");
+                }
             }
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public DialogueConditionTest CheckForCondition()
+    {
+        if( condition != null )
+        {
+            return condition;
+        }
+        else
+        {
+            return null;
         }
     }
 }

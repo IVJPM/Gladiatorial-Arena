@@ -9,6 +9,5 @@ public struct ConditionStruct
             Debug.Log(characterReply);
             conditionInformation.conditionMet = true;
         }
-
     }
 }

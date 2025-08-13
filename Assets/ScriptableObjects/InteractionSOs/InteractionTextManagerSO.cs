@@ -11,11 +11,10 @@ public class InteractionTextManagerSO : ScriptableObject
     [Header("Dialogue Options")]
     [SerializeField] string npcName;
     public List<string> greetingDialogue;
-    // [field: SerializeField] public string dialogueOptions {  get; private set; }
     [TextArea(3, 10)]
     public List<string> characterDialogue;
     public List<NPCDialogueBranches> npcDialogue;
-
+    public NPCDialogueBranches currentActiveDialogue;
 
     public int dialogueBranchIndex = 0;
 
@@ -31,13 +30,12 @@ public class InteractionTextManagerSO : ScriptableObject
 
         foreach(NPCDialogueBranches dialogueBranches in npcDialogue)
         {
-            if(dialogueBranches.condition != null) //Checking if the branches have conditions that will need to be met in order to switch to a different set of dialogue
+            if (dialogueBranches.condition != null) //Checking if the branches have conditions that will need to be met in order to switch to a different set of dialogue
             {
                 dialogueBranches.DialogueCondition();
             }
             else
             {
-                dialogueBranches.condition.enabled = false;
                 characterDialogue = greetingDialogue;
             }
         }
@@ -53,19 +51,10 @@ public class InteractionTextManagerSO : ScriptableObject
         }
     }
 
-    public void SetDialoguBranch(NPCDialogueBranches branch)
+    public NPCDialogueBranches SetDialoguBranch(NPCDialogueBranches branch)
     {
-        characterDialogue = branch.dialogue;
-    }
-    public void EnableCondition(int dialogueIndex)
-    {
-        for (dialogueIndex = 0; dialogueIndex < characterDialogue.Count; dialogueIndex++)
-        {
-            Debug.Log(dialogueIndex);
-            if (dialogueIndex == characterDialogue.Count - 1)
-            {
-                Debug.Log("I'm done talking now");
-            }
-        }
+        currentActiveDialogue = branch;
+        characterDialogue = currentActiveDialogue.dialogue;
+        return currentActiveDialogue;
     }
 }

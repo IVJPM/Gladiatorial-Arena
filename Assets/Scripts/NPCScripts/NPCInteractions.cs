@@ -51,15 +51,34 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         }
         else if (currentDialogueIndex > characterDialogue.Count - 1 && interactionDialogue.isActiveAndEnabled)
         {
-            //interactionTextManagerSO.BranchDialogue();
             currentDialogueIndex = 0;
             isInteracting = false;
         }
 
-        if(currentDialogueIndex == interactionTextManagerSO.npcDialogue[1].conditionIndex)
+        /*if(interactionTextManagerSO.currentActiveDialogue != null)
         {
-            interactionTextManagerSO.npcDialogue[1].EnableCondition(interactionTextManagerSO.npcDialogue[1].conditionIndex);
+            if (currentDialogueIndex == interactionTextManagerSO.currentActiveDialogue.conditionIndex)
+            {
+                interactionTextManagerSO.currentActiveDialogue.EnableCondition(interactionTextManagerSO.currentActiveDialogue.conditionIndex);
+            }
         }
+        else
+        {
+            print("n");
+            return;
+        }*/
+
+        for(int i = 0; i < interactionTextManagerSO.npcDialogue.Count; i++)
+        {
+            if(interactionTextManagerSO.npcDialogue[i] != null)
+            {
+                if (interactionTextManagerSO.npcDialogue[i] == interactionTextManagerSO.currentActiveDialogue && currentDialogueIndex == interactionTextManagerSO.npcDialogue[i].conditionIndex)
+                {
+                    interactionTextManagerSO.npcDialogue[i].EnableCondition(interactionTextManagerSO.npcDialogue[i].conditionIndex);
+                }
+            }
+        }
+
         /*interactionTarget = interactorTransform;
         if (interactionDialogue.IsActive() == false)
         {
