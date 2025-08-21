@@ -45,4 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditionMet: 0
-  characterReply: 110
+  condition: {fileID: -3415474497270624061, guid: 4b66cc7bcaca86b41ba4a80bb3f4b394,
+    type: 3}
+  conditionChoices: {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0,
+    type: 3}
+  buttonCondition: {fileID: 4455140185338594718, guid: 10adc5cb5a0ca2c46ad7a7ff82789766,
+    type: 3}

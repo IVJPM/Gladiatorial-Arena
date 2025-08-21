@@ -15,12 +15,21 @@ public class InteractionTextManagerSO : ScriptableObject
     public List<string> characterDialogue;
     public List<NPCDialogueBranches> npcDialogue;
     public NPCDialogueBranches currentActiveDialogue;
-
+    public Transform NPC;
     public int dialogueBranchIndex = 0;
 
     public List<string> AdjustDialogueOptions(List<string> dialogueOptions)
     {
         return dialogueOptions;
+    }
+
+    public void SetParentNPC(NPCInteractions npc)
+    {
+        for(int i = 0; i < npcDialogue.Count; i++)
+        {
+            npcDialogue[i].CreateConditions();
+        }
+        NPC = npc.transform;
     }
 
     public List<string> CharacterDialogue()

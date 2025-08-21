@@ -14,6 +14,9 @@ public class NPCDialogueBranches : ScriptableObject
 
     private InteractionTextManagerSO dialogueManager;
     public DialogueConditionTest condition;
+    public DialogueConditionTest conditionClone;
+
+
     public void SetDialogueBranchParent(InteractionTextManagerSO dialogueManager)
     {
         this.dialogueManager = dialogueManager;
@@ -21,23 +24,25 @@ public class NPCDialogueBranches : ScriptableObject
 
     public void DialogueCondition()
     {
-        conditionFulfilled = condition.conditionMet;
+        conditionFulfilled = conditionClone.conditionMet;
 
         if (conditionFulfilled)
         {
-            dialogueManager.SetDialoguBranch(this);
+            //if(conditionClone.TryGetComponent(out DialogueConditionTest newDialogue))
+            dialogueManager.SetDialoguBranch(this); // Try adding the new dialogue variables on the choice test
         }
     }
 
-    public void EnableCondition(int dialogueIndex)
+    public void EnableCondition()
     {
-        if(condition != null)
+        if(conditionClone != null)
         {
-            for (dialogueIndex = 0; dialogueIndex < dialogue.Count; dialogueIndex++)
+            for (int i = 0; i < dialogue.Count; i++)
             {
-                if (dialogueIndex == conditionIndex - 1)
+                if (i == conditionIndex - 1)
                 {
-                    condition.enabled = true;
+                    Debug.Log(conditionClone);
+                    conditionClone.gameObject.SetActive(true);
                     Debug.Log("I'm done talking now");
                 }
             }
@@ -48,6 +53,17 @@ public class NPCDialogueBranches : ScriptableObject
         }
     }
 
+    public void CreateConditions()
+    {
+        
+            //conditionClone = Instantiate(condition, dialogueManager.NPC);
+            //conditionClone.gameObject.SetActive(false);
+        if(condition.TryGetComponent(out ConditionChoiceTest conditionTest))
+        {
+            conditionClone = conditionTest.InstantiateCondition(dialogueManager.NPC);
+        }
+        
+    }
     public DialogueConditionTest CheckForCondition()
     {
         if( condition != null )

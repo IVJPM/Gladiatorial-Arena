@@ -1,41 +1,36 @@
 using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConditionInformation : DialogueConditionTest
+public class ConditionChoiceTest : DialogueConditionTest
 {
+    public event EventHandler OnChoiceDecided;
+
     [SerializeField] ConditionActivation condition;
-    [SerializeField] ConditionChoiceTest conditionChoices;
-    
-    public Button buttonCondition;
+
+    public ConditionInformation yesCondition;
+    [SerializeField] ConditionInformation noCondition;
+    public Button button;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-        conditionChoices.OnChoiceDecided += ConditionChoices_OnChoiceDecided;
-    }
-
-    private void ConditionChoices_OnChoiceDecided(object sender, EventArgs e)
-    {
-        print("n");
-        CreateDialogueCondition();
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }
 
+    // Update is called once per frame
+    void Update()
+    {// Maybe use ConditionStruct to modularize different condition outcomes (new dialogue, present choices, enable quests, etc.)
+        if (this.enabled)
+            conditionMet = true;
+    }
 
 
     public override void CreateDialogueCondition()
     {
         base.CreateDialogueCondition();
-        
+
         if (conditionMet == false)
-        {   
+        {
             ConditionStruct conditionStruct = new ConditionStruct();
             conditionMet = true;
             conditionStruct.ActivateCondition(condition);
@@ -46,5 +41,18 @@ public class ConditionInformation : DialogueConditionTest
         }
         /*ConditionStruct condition = new ConditionStruct();
         condition.CreateCondition(this);*/
+    }
+
+
+    public void YesButtonClick()
+    {
+        OnChoiceDecided?.Invoke(this, EventArgs.Empty);
+        yesCondition.CreateDialogueCondition();
+    }
+
+    public void NoButtonClick()
+    {
+        OnChoiceDecided?.Invoke(this, EventArgs.Empty);
+        noCondition.CreateDialogueCondition();
     }
 }

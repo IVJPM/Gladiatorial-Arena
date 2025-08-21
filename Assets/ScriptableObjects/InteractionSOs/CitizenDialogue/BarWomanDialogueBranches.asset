@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BarWomanDialogueBranches
   m_EditorClassIdentifier: 
   dialogue:
-  - Take care!
-  - We'll see if you come back...
-  <conditionFulfilled>k__BackingField: 0
+  - Take a look around!
+  - See anything you like?
+  <conditionFulfilled>k__BackingField: 1
   conditionIndex: 2
-  condition: {fileID: -5635580083371531564, guid: c2e2445df0f5513428ecf8eede8b4bb8,
+  condition: {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0,
     type: 3}

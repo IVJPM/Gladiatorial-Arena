@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 366bb839cce1b85498f0c5d4dcfc8dc7, type: 3}
-  m_Name: BarWomanDialogueBranches 1
+  m_Name: BarWomanDialogueBranches 2
   m_EditorClassIdentifier: 
   dialogue:
-  - Take care!
-  - We'll see if you come back...
+  - Be careful!
+  - ...There are monsters about...
   <conditionFulfilled>k__BackingField: 0
   conditionIndex: 2
-  condition: {fileID: -5635580083371531564, guid: c2e2445df0f5513428ecf8eede8b4bb8,
+  condition: {fileID: -5635580083371531564, guid: 0f10e56bc7d197f47bf2d0f1caae96dd,
     type: 3}

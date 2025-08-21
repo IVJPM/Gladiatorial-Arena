@@ -2,12 +2,8 @@ using UnityEngine;
 
 public struct ConditionStruct
 {
-    public void CreateCondition(DialogueConditionTest conditionInformation, KeyCode characterReply)
+    public void ActivateCondition(IConditionObject conditionInformation)
     {
-        if (Input.GetKeyDown(characterReply))
-        {
-            Debug.Log(characterReply);
-            conditionInformation.conditionMet = true;
-        }
+        conditionInformation.RunCondition();
     }
 }

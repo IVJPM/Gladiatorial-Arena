@@ -17,9 +17,13 @@ MonoBehaviour:
   - Hello! Welcome to Felsbane!
   - What can I do for you?
   characterDialogue:
-  - Take care!
-  - We'll see if you come back...
+  - Hello! Welcome to Felsbane!
+  - What can I do for you?
   npcDialogue:
   - {fileID: 11400000, guid: 72a2c5166b1addf4896ff6b0d2386b9c, type: 2}
   - {fileID: 11400000, guid: facf75a866e8ff040a534dd8ba23c99d, type: 2}
+  - {fileID: 11400000, guid: 316850474a74ff947bbd13d38f8418d4, type: 2}
+  currentActiveDialogue: {fileID: 11400000, guid: 72a2c5166b1addf4896ff6b0d2386b9c,
+    type: 2}
+  NPC: {fileID: 3723416120761314322, guid: c727d34eb73dc344195b60692f4a75b5, type: 3}
   dialogueBranchIndex: 0

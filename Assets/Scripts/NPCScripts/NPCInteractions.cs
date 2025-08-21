@@ -23,6 +23,7 @@ public class NPCInteractions : MonoBehaviour, IInteractables
     {
         if(interactionTextManagerSO != null)
         {
+            interactionTextManagerSO.SetParentNPC(this);
             characterDialogue = interactionTextManagerSO.CharacterDialogue();
             currentDialogueIndex = 0;
         }
@@ -59,7 +60,7 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         {
             if (currentDialogueIndex == interactionTextManagerSO.currentActiveDialogue.conditionIndex)
             {
-                interactionTextManagerSO.currentActiveDialogue.EnableCondition(interactionTextManagerSO.currentActiveDialogue.conditionIndex);
+                interactionTextManagerSO.currentActiveDialogue.EnableCondition();
             }
         }
         else
@@ -68,32 +69,15 @@ public class NPCInteractions : MonoBehaviour, IInteractables
             return;
         }*/
 
-        for(int i = 0; i < interactionTextManagerSO.npcDialogue.Count; i++)
+        /*for(int i = 0; i < interactionTextManagerSO.npcDialogue.Count; i++)
         {
             if(interactionTextManagerSO.npcDialogue[i] != null)
             {
-                if (interactionTextManagerSO.npcDialogue[i] == interactionTextManagerSO.currentActiveDialogue && currentDialogueIndex == interactionTextManagerSO.npcDialogue[i].conditionIndex)
+                if (interactionTextManagerSO.npcDialogue[i] == interactionTextManagerSO.currentActiveDialogue && currentDialogueIndex == interactionTextManagerSO.currentActiveDialogue.conditionIndex)
                 {
-                    interactionTextManagerSO.npcDialogue[i].EnableCondition(interactionTextManagerSO.npcDialogue[i].conditionIndex);
+                    interactionTextManagerSO.currentActiveDialogue.EnableCondition();
                 }
             }
-        }
-
-        /*interactionTarget = interactorTransform;
-        if (interactionDialogue.IsActive() == false)
-        {
-            isInteracting = true;
-            currentDialogue = 0;
-        }
-        if (currentDialogue < interactionTextManagerSO.npcDialogue.Count)
-        {
-            interactionDialogue.text = interactionTextManagerSO.npcDialogue[currentDialogue];
-        }
-        currentDialogue++;
-
-        if(interactionDialogue.IsActive() == true && currentDialogue > interactionTextManagerSO.npcDialogue.Count)
-        {
-            isInteracting = false;
         }*/
     }
 
