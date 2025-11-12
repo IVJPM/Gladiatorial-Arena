@@ -6,8 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NPCDialogueBranches", menuName = "NPCDialogue/NPCDialogueBranches")]
 public class NPCDialogueBranches : ScriptableObject
 {
+    [Header("Dialogue")]
     [TextArea(3, 10)]
     public List<string> dialogue;
+    
     [field:SerializeField] public bool conditionFulfilled { get; private set; }
 
     public int conditionIndex;
@@ -28,6 +30,7 @@ public class NPCDialogueBranches : ScriptableObject
 
         if (conditionFulfilled)
         {
+            Debug.Log(conditionClone);
             //if(conditionClone.TryGetComponent(out DialogueConditionTest newDialogue))
             dialogueManager.SetDialoguBranch(this); // Try adding the new dialogue variables on the choice test
         }
@@ -55,14 +58,8 @@ public class NPCDialogueBranches : ScriptableObject
 
     public void CreateConditions()
     {
-        
-            //conditionClone = Instantiate(condition, dialogueManager.NPC);
-            //conditionClone.gameObject.SetActive(false);
-        if(condition.TryGetComponent(out ConditionChoiceTest conditionTest))
-        {
-            conditionClone = conditionTest.InstantiateCondition(dialogueManager.NPC);
-        }
-        
+        conditionClone = condition.InstantiateCondition(dialogueManager.NPC);
+        conditionClone.gameObject.SetActive(true);
     }
     public DialogueConditionTest CheckForCondition()
     {

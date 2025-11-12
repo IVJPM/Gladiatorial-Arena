@@ -10,7 +10,7 @@ public class ConditionChoiceTest : DialogueConditionTest
 
     public ConditionInformation yesCondition;
     [SerializeField] ConditionInformation noCondition;
-    public Button button;
+    //public Button button;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +20,7 @@ public class ConditionChoiceTest : DialogueConditionTest
     // Update is called once per frame
     void Update()
     {// Maybe use ConditionStruct to modularize different condition outcomes (new dialogue, present choices, enable quests, etc.)
-        if (this.enabled)
+        if (this.isActiveAndEnabled)
             conditionMet = true;
     }
 
@@ -46,13 +46,13 @@ public class ConditionChoiceTest : DialogueConditionTest
 
     public void YesButtonClick()
     {
-        OnChoiceDecided?.Invoke(this, EventArgs.Empty);
+        //OnChoiceDecided?.Invoke(this, EventArgs.Empty);
         yesCondition.CreateDialogueCondition();
     }
 
     public void NoButtonClick()
     {
-        OnChoiceDecided?.Invoke(this, EventArgs.Empty);
+        //OnChoiceDecided?.Invoke(this, EventArgs.Empty);
         noCondition.CreateDialogueCondition();
     }
 }

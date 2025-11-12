@@ -123,7 +123,6 @@ MonoBehaviour:
     type: 3}
   noCondition: {fileID: -5635580083371531564, guid: 0f10e56bc7d197f47bf2d0f1caae96dd,
     type: 3}
-  button: {fileID: 0}
 --- !u!1001 &3286060783429711214
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -32,30 +32,12 @@ public class NPCInteractions : MonoBehaviour, IInteractables
             return;
         }
     }
+
+
     public virtual void Interact(Transform interactorTransform)
     {
-        characterDialogue = interactionTextManagerSO.CharacterDialogue();
-
-        interactionTarget = interactorTransform;
-
-
-        if (!interactionDialogue.isActiveAndEnabled)
-        {
-            isInteracting = true;
-            currentDialogueIndex = 0;
-        }
-
-        if (currentDialogueIndex < characterDialogue.Count && interactionDialogue.enabled)
-        {
-            interactionDialogue.text = characterDialogue[currentDialogueIndex];
-            currentDialogueIndex++;
-        }
-        else if (currentDialogueIndex > characterDialogue.Count - 1 && interactionDialogue.isActiveAndEnabled)
-        {
-            currentDialogueIndex = 0;
-            isInteracting = false;
-        }
-
+        NpcDialogue(interactorTransform);
+        
         /*if(interactionTextManagerSO.currentActiveDialogue != null)
         {
             if (currentDialogueIndex == interactionTextManagerSO.currentActiveDialogue.conditionIndex)
@@ -81,11 +63,40 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         }*/
     }
 
+    private void NpcDialogue(Transform interactorTransform)
+    {
+        //characterDialogue = interactionTextManagerSO.CharacterDialogue();
+
+        interactionTarget = interactorTransform;
+
+
+        if (!interactionDialogue.isActiveAndEnabled || interactionTextManagerSO.SwitchDialogue()) // Create 'PlayFromBeginning()' function to find a way to restart dialogue without exiting current conversattion first?
+        {                                                                                         // Also create function to display dialogue based on different actions (open merchant menu, finish final dialogue, etc.) 
+                                                                                                  // without having to manually press the dialogue action button
+            characterDialogue = interactionTextManagerSO.CharacterDialogue();
+            isInteracting = true;
+            currentDialogueIndex = 0;
+            interactionTextManagerSO.switchDialogue = false;
+        }
+
+        if (currentDialogueIndex < characterDialogue.Count && interactionDialogue.enabled)
+        {
+            interactionDialogue.text = characterDialogue[currentDialogueIndex];
+            currentDialogueIndex++;
+        }
+        else if (currentDialogueIndex > characterDialogue.Count - 1 && interactionDialogue.isActiveAndEnabled)
+        {
+            //characterDialogue = interactionTextManagerSO.CharacterDialogue();
+            currentDialogueIndex = 0;
+            isInteracting = false;
+        }
+    }
+
     private void Update()
     {
         //SetNPCDialogue();
 
-        if (interactionTarget != null)
+            if (interactionTarget != null)
         {
             if (Vector3.Distance(transform.position, interactionTarget.position) > 3f)
             {

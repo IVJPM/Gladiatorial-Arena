@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class InteractionTextManagerSO : ScriptableObject
 {
+    public event EventHandler OnSwitchDialogue;
+
     [Header("Dialogue Options")]
     [SerializeField] string npcName;
     public List<string> greetingDialogue;
@@ -17,11 +19,7 @@ public class InteractionTextManagerSO : ScriptableObject
     public NPCDialogueBranches currentActiveDialogue;
     public Transform NPC;
     public int dialogueBranchIndex = 0;
-
-    public List<string> AdjustDialogueOptions(List<string> dialogueOptions)
-    {
-        return dialogueOptions;
-    }
+    public bool switchDialogue;
 
     public void SetParentNPC(NPCInteractions npc)
     {
@@ -50,7 +48,11 @@ public class InteractionTextManagerSO : ScriptableObject
         }
         return characterDialogue;
     }
-
+    
+    public bool SwitchDialogue()
+    {
+        return switchDialogue;
+    }
 
     private void GrabCurrentDialogueBranch()
     {
@@ -63,7 +65,12 @@ public class InteractionTextManagerSO : ScriptableObject
     public NPCDialogueBranches SetDialoguBranch(NPCDialogueBranches branch)
     {
         currentActiveDialogue = branch;
+        if(currentActiveDialogue.conditionFulfilled)
+        {
+            switchDialogue = true;
+        }
         characterDialogue = currentActiveDialogue.dialogue;
+
         return currentActiveDialogue;
     }
 }

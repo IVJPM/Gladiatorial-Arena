@@ -15,7 +15,9 @@ MonoBehaviour:
   dialogue:
   - Take a look around!
   - See anything you like?
-  <conditionFulfilled>k__BackingField: 1
+  <conditionFulfilled>k__BackingField: 0
   conditionIndex: 2
   condition: {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0,
+    type: 3}
+  conditionClone: {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0,
     type: 3}

@@ -13,14 +13,15 @@ public class ConditionInformation : DialogueConditionTest
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        conditionChoices.OnChoiceDecided += ConditionChoices_OnChoiceDecided;
+        conditionMet = false;
+        //conditionChoices.OnChoiceDecided += ConditionChoices_OnChoiceDecided;
     }
 
-    private void ConditionChoices_OnChoiceDecided(object sender, EventArgs e)
-    {
-        print("n");
-        CreateDialogueCondition();
-    }
+    //private void ConditionChoices_OnChoiceDecided(object sender, EventArgs e)
+    //{
+    //    print("n");
+    //    CreateDialogueCondition();
+    //}
 
     // Update is called once per frame
     void Update()
