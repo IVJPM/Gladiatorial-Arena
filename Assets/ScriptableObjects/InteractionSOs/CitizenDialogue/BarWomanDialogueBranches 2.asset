@@ -19,3 +19,6 @@ MonoBehaviour:
   conditionIndex: 2
   condition: {fileID: -5635580083371531564, guid: 0f10e56bc7d197f47bf2d0f1caae96dd,
     type: 3}
+  conditionClone: {fileID: -5635580083371531564, guid: 0f10e56bc7d197f47bf2d0f1caae96dd,
+    type: 3}
+  conditionSpawner: {fileID: 0}

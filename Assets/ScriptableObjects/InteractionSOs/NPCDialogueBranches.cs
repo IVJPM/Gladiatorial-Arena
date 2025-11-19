@@ -17,6 +17,7 @@ public class NPCDialogueBranches : ScriptableObject
     private InteractionTextManagerSO dialogueManager;
     public DialogueConditionTest condition;
     public DialogueConditionTest conditionClone;
+    [SerializeField] ConditionSpawner conditionSpawner;
 
 
     public void SetDialogueBranchParent(InteractionTextManagerSO dialogueManager)
@@ -24,13 +25,26 @@ public class NPCDialogueBranches : ScriptableObject
         this.dialogueManager = dialogueManager;
     }
 
+    public void SetConditionSpawner(ConditionSpawner conditionSpawnerRoot)
+    {
+        conditionSpawner = conditionSpawnerRoot;
+
+        for (int i = 0; i < conditionSpawner.conditionClone.Count; i++)
+        {
+            if (conditionSpawner.dialogueBranches[i] == this)
+            {
+                conditionClone = conditionSpawner.conditionClone[i];
+            }
+        }
+    }
+
     public void DialogueCondition()
     {
         conditionFulfilled = conditionClone.conditionMet;
+        //conditionClone.SetConditionActive(this);
 
         if (conditionFulfilled)
         {
-            Debug.Log(conditionClone);
             //if(conditionClone.TryGetComponent(out DialogueConditionTest newDialogue))
             dialogueManager.SetDialoguBranch(this); // Try adding the new dialogue variables on the choice test
         }
@@ -38,30 +52,15 @@ public class NPCDialogueBranches : ScriptableObject
 
     public void EnableCondition()
     {
-        if(conditionClone != null)
-        {
-            for (int i = 0; i < dialogue.Count; i++)
-            {
-                if (i == conditionIndex - 1)
-                {
-                    Debug.Log(conditionClone);
-                    conditionClone.gameObject.SetActive(true);
-                    Debug.Log("I'm done talking now");
-                }
-            }
-        }
-        else
-        {
-            return;
-        }
+        conditionClone.gameObject.SetActive(true);
     }
 
     public void CreateConditions()
     {
-        conditionClone = condition.InstantiateCondition(dialogueManager.NPC);
-        conditionClone.gameObject.SetActive(true);
+        //conditionClone = condition.InstantiateCondition(dialogueManager.NPC);
+        //conditionClone.gameObject.SetActive(true);
     }
-    public DialogueConditionTest CheckForCondition()
+    /*public DialogueConditionTest CheckForCondition()
     {
         if( condition != null )
         {
@@ -71,5 +70,5 @@ public class NPCDialogueBranches : ScriptableObject
         {
             return null;
         }
-    }
+    }*/
 }

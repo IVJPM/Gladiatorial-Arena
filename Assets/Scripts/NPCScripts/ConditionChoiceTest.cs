@@ -10,21 +10,27 @@ public class ConditionChoiceTest : DialogueConditionTest
 
     public ConditionInformation yesCondition;
     [SerializeField] ConditionInformation noCondition;
+    GameObject yesAnswer;
+    GameObject noAnswer;
     //public Button button;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        yesAnswer = yesCondition.gameObject;
+        yesAnswer = GameObject.Find("ConditionTest(Clone)");
+
+        noAnswer = noCondition.gameObject;
+        noAnswer = GameObject.Find("ConditionTest 1(Clone)");
     }
 
     // Update is called once per frame
     void Update()
     {// Maybe use ConditionStruct to modularize different condition outcomes (new dialogue, present choices, enable quests, etc.)
         if (this.isActiveAndEnabled)
+        {
             conditionMet = true;
+        }
     }
-
-
     public override void CreateDialogueCondition()
     {
         base.CreateDialogueCondition();
@@ -47,12 +53,12 @@ public class ConditionChoiceTest : DialogueConditionTest
     public void YesButtonClick()
     {
         //OnChoiceDecided?.Invoke(this, EventArgs.Empty);
-        yesCondition.CreateDialogueCondition();
+        yesAnswer.GetComponent<ConditionInformation>().CreateDialogueCondition();
     }
 
     public void NoButtonClick()
     {
         //OnChoiceDecided?.Invoke(this, EventArgs.Empty);
-        noCondition.CreateDialogueCondition();
+        noAnswer.GetComponent<ConditionInformation>().CreateDialogueCondition();
     }
 }

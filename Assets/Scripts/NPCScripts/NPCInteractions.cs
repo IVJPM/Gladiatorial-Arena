@@ -7,24 +7,24 @@ using UnityEditor.Rendering;
 
 public class NPCInteractions : MonoBehaviour, IInteractables
 {
-    [SerializeField] int currentDialogueIndex;
+    [SerializeField] public int currentDialogueIndex;
     [SerializeField] int questCompleteDialogue;
     [SerializeField] bool isInteracting;
     [SerializeField] string interactionButtonText;
 
     [SerializeField] List<string> newInteractionDialogue;
-    [SerializeField] List<string> characterDialogue;
+    [SerializeField] public List<string> characterDialogue;
     [SerializeField] InteractionTextManagerSO interactionTextManagerSO;
 
     public TextMeshProUGUI interactionDialogue;
     private Transform interactionTarget;
 
-    private void Awake()
+    private void Start()
     {
         if(interactionTextManagerSO != null)
         {
-            interactionTextManagerSO.SetParentNPC(this);
-            characterDialogue = interactionTextManagerSO.CharacterDialogue();
+            //interactionTextManagerSO.SetParentNPC(this);
+            characterDialogue = interactionTextManagerSO.CharacterDialogue(this);
             currentDialogueIndex = 0;
         }
         else
@@ -65,15 +65,15 @@ public class NPCInteractions : MonoBehaviour, IInteractables
 
     private void NpcDialogue(Transform interactorTransform)
     {
+        print(currentDialogueIndex);
         //characterDialogue = interactionTextManagerSO.CharacterDialogue();
 
         interactionTarget = interactorTransform;
 
-
         if (!interactionDialogue.isActiveAndEnabled || interactionTextManagerSO.SwitchDialogue()) // Create 'PlayFromBeginning()' function to find a way to restart dialogue without exiting current conversattion first?
         {                                                                                         // Also create function to display dialogue based on different actions (open merchant menu, finish final dialogue, etc.) 
                                                                                                   // without having to manually press the dialogue action button
-            characterDialogue = interactionTextManagerSO.CharacterDialogue();
+            characterDialogue = interactionTextManagerSO.CharacterDialogue(this);
             isInteracting = true;
             currentDialogueIndex = 0;
             interactionTextManagerSO.switchDialogue = false;
@@ -107,6 +107,8 @@ public class NPCInteractions : MonoBehaviour, IInteractables
         {
             return;
         }
+
+        //interactionTextManagerSO.CheckNPCIndex(this);
     }
 
     /*private void SetNPCDialogue()

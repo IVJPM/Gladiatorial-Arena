@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditionMet: 0
+  dialogueIndex: 2
   condition: {fileID: -3415474497270624061, guid: 4b66cc7bcaca86b41ba4a80bb3f4b394,
     type: 3}
   yesCondition: {fileID: -5635580083371531564, guid: c2e2445df0f5513428ecf8eede8b4bb8,

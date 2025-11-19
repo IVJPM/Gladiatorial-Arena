@@ -16,6 +16,9 @@ MonoBehaviour:
   - Take care!
   - We'll see if you come back...
   <conditionFulfilled>k__BackingField: 0
-  conditionIndex: 2
+  conditionIndex: 1
   condition: {fileID: -5635580083371531564, guid: c2e2445df0f5513428ecf8eede8b4bb8,
     type: 3}
+  conditionClone: {fileID: -5635580083371531564, guid: c2e2445df0f5513428ecf8eede8b4bb8,
+    type: 3}
+  conditionSpawner: {fileID: 0}

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditionMet: 0
+  dialogueIndex: 0
   condition: {fileID: -3415474497270624061, guid: 4b66cc7bcaca86b41ba4a80bb3f4b394,
     type: 3}
   conditionChoices: {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0,
