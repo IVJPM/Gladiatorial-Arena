@@ -17,6 +17,6 @@ public class ConditionActivation : MonoBehaviour, IConditionObject
 
     public void RunCondition()
     {
-        print(gameObject.transform.name);
+        //print(gameObject.transform.name);
     }
 }

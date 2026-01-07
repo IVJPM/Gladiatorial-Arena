@@ -27,7 +27,7 @@ public class PatrolState : State
 
     public override void ExitState()
     {
-        npcPatrol.navMeshAgent.isStopped = true;
+       npcPatrol.navMeshAgent.isStopped = true;
         //npcPatrol.StopCoroutine(npcPatrol.PatrolPosition());
     }
 }

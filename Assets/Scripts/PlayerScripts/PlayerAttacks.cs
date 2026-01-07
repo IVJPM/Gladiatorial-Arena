@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,16 +11,38 @@ public class PlayerAttacks : MonoBehaviour
     private bool canAttack;
 
     [SerializeField] GameObject weaponObject;
-    [SerializeField] AnimationClip attackAnimaton;
+    [SerializeField] AnimationClip attackAnimation;
+    [SerializeField] AnimationClip comboAnimation;
     [SerializeField] WeaponItemSO playerWeapon;
     [SerializeField] AttackState playerAttackState;
     [SerializeField] WeaponDamageCollider weaponDamageCollider;
+
+    [SerializeField][Range(0, 1)]
+    float attackAnimationResetSpeed;
+
+    Animator animator;
+    bool attacking;
+    bool transitionAttack;
+    public bool comboAttack;
     PlayerEquipmentManager equipmentManager;
     // Start is called before the first frame update
     void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
         equipmentManager = GetComponent<PlayerEquipmentManager>();
+        animator = GetComponent<Animator>();
+
+        playerInputManager.OnHeavyAttack += PlayerInputManager_OnHeavyAttack;
+    }
+
+    private void PlayerInputManager_OnHeavyAttack(object sender, EventArgs e)
+    {
+        if(transitionAttack && !comboAttack)
+        {
+            comboAttack = true;
+            animator.Play("slash2");
+            animator.SetFloat("animationSpeed", 1f);
+        }
     }
 
     private void Update()
@@ -35,21 +58,41 @@ public class PlayerAttacks : MonoBehaviour
 
         if(playerWeapon != null)
         {
-            attackAnimaton = playerWeapon.weaponAnimationClip;
-            playerAttackState.SetAttackAnimation(attackAnimaton);
+            if(playerInputManager.attackInput && !comboAttack)
+            {
+                attackAnimation = playerWeapon.weaponAnimationClip;
+            }
+            else if(comboAttack)
+            {
+                attackAnimation = playerWeapon.weaponComboClip;
+            }
+
+                playerAttackState.SetAttackAnimation(attackAnimation);
         }
         else
         {
             return;
         }
         
-        if (playerInputManager.attackInput == true && playerWeapon != null)
+        if (playerInputManager.attackInput == true && playerWeapon != null || comboAttack && playerWeapon != null)
         {
+            animator.SetFloat("animationSpeed", 1f);
+
             attackReset += Time.deltaTime;
 
-            if (attackReset >= attackAnimaton.length * .55f)
+
+            if (attackReset >= attackAnimation.length)
             {
-                playerInputManager.attackInput = false;
+                animator.SetFloat("animationSpeed", playerWeapon.weaponResetSpeed); //Some animations reset too quickly, used to slow them down when needed
+                if(attackAnimation == playerWeapon.weaponAnimationClip)
+                {
+                    playerInputManager.attackInput = false;
+                }
+                else
+                {
+                    comboAttack = false;
+                }
+                attackAnimation = playerWeapon.weaponAnimationClip;
             }
         }
         else if (playerInputManager.attackInput == false || playerWeapon == null)
@@ -61,13 +104,31 @@ public class PlayerAttacks : MonoBehaviour
 
     public void EnableDamageCollider()
     {
-        weaponDamageCollider = weaponObject.GetComponentInChildren<WeaponDamageCollider>();
-        weaponDamageCollider.gameObject.GetComponent<Collider>().enabled = true;
+        
+            weaponDamageCollider = weaponObject.GetComponentInChildren<WeaponDamageCollider>();
+            weaponDamageCollider.gameObject.GetComponent<Collider>().enabled = true;
     }
 
     public void DisableDamageCollider()
     {
-        weaponDamageCollider = weaponObject.GetComponentInChildren<WeaponDamageCollider>();
-        weaponDamageCollider.gameObject.GetComponent<Collider>().enabled = false;
+            weaponDamageCollider = weaponObject.GetComponentInChildren<WeaponDamageCollider>();
+            weaponDamageCollider.gameObject.GetComponent<Collider>().enabled = false;
+    }
+
+    public void ChainAttack()
+    {
+        transitionAttack = true;
+        //print("combo");
+    }
+
+    public void ResetChainAttack()
+    {
+        transitionAttack = false;
+        //print("reset");
+    }
+
+    public void TestComboEvent()
+    {
+        //print("success");
     }
 }

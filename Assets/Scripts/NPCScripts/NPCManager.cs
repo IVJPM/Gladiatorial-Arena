@@ -41,11 +41,11 @@ public class NPCManager : StateMachineController
     {
         if (groundCheck.isGrounded)
         {
-           if(npcInteractions.IsInteracting() == true)
+           if(npcInteractions.IsInteracting())
             {
                 stateMachine.Set(talkingState);
             }
-           else if(npcPatrol != null && npcInteractions.IsInteracting() == false)
+           else if(npcPatrol != null && !npcInteractions.IsInteracting())
             {
                 stateMachine.Set(patrolState);
             }

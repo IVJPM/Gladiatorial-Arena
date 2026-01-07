@@ -34,6 +34,7 @@ public class PlayerManager : CharacterManager
     {
         SetCharacterState();
         stateMachine.state.PerformState();
+        print(stateMachine.state);
     }
 
     void FixedUpdate()
@@ -69,21 +70,21 @@ public class PlayerManager : CharacterManager
     {
         if (playerMovement.CheckIfGrounded() || playerMovement.OnSlope())
         {
-            if (playerInputManager.moveInput == Vector2.zero && playerInputManager.attackInput != true && !playerMovement.isDodging)
+            if (playerInputManager.moveInput == Vector2.zero && playerInputManager.attackInput != true && !playerAttacks.comboAttack && !playerMovement.isDodging)
             {
                 stateMachine.Set(idleState);
             }
-            else if(playerInputManager.moveInput != Vector2.zero && playerInputManager.attackInput != true && !playerMovement.isDodging)
+            else if(playerInputManager.moveInput != Vector2.zero && playerInputManager.attackInput != true && !playerAttacks.comboAttack && !playerMovement.isDodging)
             {
                 playerMovement.movementSpeed = playerMovementSpeed;
                 stateMachine.Set(runState);
             }
-            else if (playerInputManager.attackInput == true && !playerMovement.isDodging)
+            else if (playerInputManager.attackInput == true && !playerMovement.isDodging || playerAttacks.comboAttack && !playerMovement.isDodging)
             {
                 playerMovement.movementSpeed = stopMovement;   
                 stateMachine.Set(attackState);
             }
-            else if(playerMovement.isDodging && !playerInputManager.attackInput)
+            else if(playerMovement.isDodging && !playerInputManager.attackInput || playerMovement.isDodging && !playerAttacks.comboAttack)
             {
                 stateMachine.Set(dodgeState);
             }

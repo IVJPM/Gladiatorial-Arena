@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +15,6 @@ public class ConditionSpawner : MonoBehaviour
     void Awake()
     {
         CreateConditions();
-        dialogueManager.SetParentNPC();
-        dialogueManager.CreateDialogueBranchConditionClones(this);
-
         for (int i = 0; i < dialogueBranches.Count; i++)
         {
             dialogueBranches[i].SetConditionSpawner(this);
@@ -33,9 +31,6 @@ public class ConditionSpawner : MonoBehaviour
         for (conditionIndex = 0; conditionIndex < condition.Count; conditionIndex++)
         {
             conditionClone[conditionIndex] = dialogueBranches[conditionIndex].condition.InstantiateCondition(npc.transform);
-            conditionClone[conditionIndex].gameObject.SetActive(true);
-
-            print(conditionClone[conditionIndex].name);
         }
     }
 }

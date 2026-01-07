@@ -61,6 +61,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if(weapon != currentWeapon && !weapon.weaponItem.isEquipped)
             {
+                print("weapon");
                 Destroy(currentEquippedWeapon);
                 currentWeapon = weapon.weaponItem;
                 playerInventory.WeaponChange(currentWeapon);

@@ -11,8 +11,12 @@ public class WeaponItemSO : Item
     public bool isLeftHandWeapon;
     public bool isEquipped = false;
     public AnimationClip weaponAnimationClip;
+    public AnimationClip weaponComboClip;
 
 
     [Header("Weapon Base Damage")]
     public int weaponDamage;
+
+    [Range(0f, 1f)]
+    public float weaponResetSpeed;
 }

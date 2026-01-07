@@ -47,9 +47,9 @@ MonoBehaviour:
   dialogueBranches: []
   npc: {fileID: 9171244026629164272, guid: c727d34eb73dc344195b60692f4a75b5, type: 3}
   condition:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0, type: 3}
+  - {fileID: -5635580083371531564, guid: c2e2445df0f5513428ecf8eede8b4bb8, type: 3}
+  - {fileID: -5635580083371531564, guid: 0f10e56bc7d197f47bf2d0f1caae96dd, type: 3}
   conditionClone:
   - {fileID: 0}
   - {fileID: 0}

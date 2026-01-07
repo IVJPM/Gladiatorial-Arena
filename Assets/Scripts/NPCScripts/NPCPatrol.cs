@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -31,6 +32,8 @@ public class NPCPatrol : MonoBehaviour
     public Vector2 forwardDirection;
     public bool patrolling;
 
+    float patrolResetTimer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,19 +48,11 @@ public class NPCPatrol : MonoBehaviour
 
     public void HandleCharacterMovement()
     {
-        patrolPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        patrolPosition = new Vector3(navMeshAgent.transform.position.x, 0, navMeshAgent.transform.position.z);
 
-        newPosition = targetPosition - patrolPosition;
-
-        if (Vector3.Distance(patrolPosition, targetPosition) > .1f && patrolling && navMeshAgent.isStopped == false)
+        if (Vector3.Distance(patrolPosition, targetPosition) > navMeshAgent.stoppingDistance && patrolling && navMeshAgent.isStopped == false)
         {
-                newPosition = newPosition.normalized;
-                /*transform.position = Vector3.SmoothDamp(patrolPosition, targetPosition, ref velocity, .5f, 2);
-
-                Quaternion rotate = Quaternion.LookRotation(newPosition);
-                Quaternion smoothRotate = Quaternion.Slerp(transform.rotation, rotate, .05f);
-                transform.rotation = smoothRotate;*/
-
+            patrolResetTimer += Time.deltaTime;
             navMeshAgent.destination = targetPosition;
 
             if (!characterAnimation.GetNextAnimatorStateInfo(0).IsName(walkClip.name))
@@ -65,8 +60,14 @@ public class NPCPatrol : MonoBehaviour
                 AnimationsManager.instance.PlayAnimation(characterAnimation, walkClip, .1f);
             }
         }
-        else if (Vector3.Distance(patrolPosition, targetPosition) <= .1f || !NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
+        else if (Vector3.Distance(patrolPosition, targetPosition) <= navMeshAgent.stoppingDistance)
         {
+            patrolResetTimer = 0;
+            StartCoroutine(PatrolPosition());
+        }
+        if(navMeshAgent.velocity.magnitude == 0 && patrolResetTimer > patrolTimer)
+        {
+            patrolResetTimer = 0;
             StartCoroutine(PatrolPosition());
         }
     }
@@ -85,11 +86,11 @@ public IEnumerator PatrolPosition()
 
         for (int i = 0; i < patrolPoint.Length; i++)
         {
-            patrolIndex = Random.Range(0, patrolPoint.Length);
-            targetPosition = new Vector3(Random.Range(transform.position.x, patrolPoint[patrolIndex].position.x), 0, Random.Range(transform.position.z, patrolPoint[patrolIndex].position.z));
+            patrolIndex = UnityEngine.Random.Range(0, patrolPoint.Length);
+            targetPosition = new Vector3(UnityEngine.Random.Range(transform.position.x, patrolPoint[patrolIndex].position.x), 0, UnityEngine.Random.Range(transform.position.z, patrolPoint[patrolIndex].position.z));
         }
 
-        yield return new WaitForSeconds(Random.Range(0, patrolTimer));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0, patrolTimer));
         navMeshAgent.isStopped = false;
         patrolling = true;
     }

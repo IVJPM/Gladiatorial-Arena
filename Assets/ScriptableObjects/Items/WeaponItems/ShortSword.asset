@@ -21,3 +21,4 @@ MonoBehaviour:
   isEquipped: 1
   weaponAnimationClip: {fileID: 7400000, guid: c4b95fafabe526941a7d20b2c3b6d980, type: 2}
   weaponDamage: 4
+  weaponResetSpeed: 1

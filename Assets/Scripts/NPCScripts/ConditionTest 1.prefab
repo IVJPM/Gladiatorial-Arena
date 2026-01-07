@@ -50,5 +50,7 @@ MonoBehaviour:
     type: 3}
   conditionChoices: {fileID: -1204061762098666336, guid: 3e43a7169fffbfe41b1a65706d292ad0,
     type: 3}
-  buttonCondition: {fileID: 4455140185338594718, guid: 10adc5cb5a0ca2c46ad7a7ff82789766,
+  buttonCondition: {fileID: 4380625163928750745, guid: 10adc5cb5a0ca2c46ad7a7ff82789766,
     type: 3}
+  enableCondition: 0
+  conditionInfoID: 2

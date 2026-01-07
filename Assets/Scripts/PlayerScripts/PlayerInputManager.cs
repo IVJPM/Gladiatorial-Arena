@@ -22,6 +22,7 @@ public class PlayerInputManager : MonoBehaviour
     public Vector2 camRot;
 
     public event EventHandler OnInteract;
+    public event EventHandler OnHeavyAttack;
     public event EventHandler OnPause;
     public event EventHandler OnDodge;
 
@@ -49,11 +50,17 @@ public class PlayerInputManager : MonoBehaviour
             playerInputs.CameraMovement.CameraMovement.performed += i => camRot = i.ReadValue<Vector2>();
             playerInputs.CameraMovement.CameraMovement.canceled += i => camRot = Vector2.zero;
             playerInputs.AttackInputs.AttackInputs.performed += i => attackInput = true;
+            playerInputs.AttackInputs.HeavyAttack.performed += HeavyAttack_performed;
             playerInputs.InteractionInput.InteractionInput.performed += Interactable_performed;
             playerInputs.PauseMenu.Pause.performed += Pause_performed;
         }
 
         playerInputs.Enable();
+    }
+
+    private void HeavyAttack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnHeavyAttack?.Invoke(this, EventArgs.Empty);
     }
 
     private void PlayerDodge_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

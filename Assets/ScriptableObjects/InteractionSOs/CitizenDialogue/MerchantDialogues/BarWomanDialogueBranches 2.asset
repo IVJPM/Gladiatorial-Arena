@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366bb839cce1b85498f0c5d4dcfc8dc7, type: 3}
+  m_Name: BarWomanDialogueBranches 2
+  m_EditorClassIdentifier: 
+  dialogue:
+  - An explorer, eh? Well, if you're interested...
+  - Felsbane's had a problem with a rogue plague doctor.
+  - Our Mayor Flint is at the top of the hill, to the left.
+  - He can give you more details. Please be careful...
+  <conditionFulfilled>k__BackingField: 1
+  keepConditionActive: 1
+  condition: {fileID: -5635580083371531564, guid: 0f10e56bc7d197f47bf2d0f1caae96dd,
+    type: 3}
+  conditionIndex: 2

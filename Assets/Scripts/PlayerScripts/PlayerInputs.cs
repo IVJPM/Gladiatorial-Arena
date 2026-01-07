@@ -370,9 +370,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": ""AttackInputs"",
                     ""type"": ""Button"",
                     ""id"": ""213c8b9e-a74b-47b8-a2b2-8ce4f5f88a7e"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""11999e73-b0d7-44d3-be69-9401d450e4c0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": true
                 }
             ],
@@ -398,6 +407,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""AttackInputs"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c2e3df8-928b-45c3-9dad-f9018b979a84"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -409,7 +429,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": ""InteractionInput"",
                     ""type"": ""Button"",
                     ""id"": ""11fba23a-97b3-498a-831d-960416d3a2c1"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -492,6 +512,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // AttackInputs
         m_AttackInputs = asset.FindActionMap("AttackInputs", throwIfNotFound: true);
         m_AttackInputs_AttackInputs = m_AttackInputs.FindAction("AttackInputs", throwIfNotFound: true);
+        m_AttackInputs_HeavyAttack = m_AttackInputs.FindAction("HeavyAttack", throwIfNotFound: true);
         // InteractionInput
         m_InteractionInput = asset.FindActionMap("InteractionInput", throwIfNotFound: true);
         m_InteractionInput_InteractionInput = m_InteractionInput.FindAction("InteractionInput", throwIfNotFound: true);
@@ -786,6 +807,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_AttackInputs;
     private List<IAttackInputsActions> m_AttackInputsActionsCallbackInterfaces = new List<IAttackInputsActions>();
     private readonly InputAction m_AttackInputs_AttackInputs;
+    private readonly InputAction m_AttackInputs_HeavyAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "AttackInputs".
     /// </summary>
@@ -801,6 +823,10 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "AttackInputs/AttackInputs".
         /// </summary>
         public InputAction @AttackInputs => m_Wrapper.m_AttackInputs_AttackInputs;
+        /// <summary>
+        /// Provides access to the underlying input action "AttackInputs/HeavyAttack".
+        /// </summary>
+        public InputAction @HeavyAttack => m_Wrapper.m_AttackInputs_HeavyAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -830,6 +856,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @AttackInputs.started += instance.OnAttackInputs;
             @AttackInputs.performed += instance.OnAttackInputs;
             @AttackInputs.canceled += instance.OnAttackInputs;
+            @HeavyAttack.started += instance.OnHeavyAttack;
+            @HeavyAttack.performed += instance.OnHeavyAttack;
+            @HeavyAttack.canceled += instance.OnHeavyAttack;
         }
 
         /// <summary>
@@ -844,6 +873,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @AttackInputs.started -= instance.OnAttackInputs;
             @AttackInputs.performed -= instance.OnAttackInputs;
             @AttackInputs.canceled -= instance.OnAttackInputs;
+            @HeavyAttack.started -= instance.OnHeavyAttack;
+            @HeavyAttack.performed -= instance.OnHeavyAttack;
+            @HeavyAttack.canceled -= instance.OnHeavyAttack;
         }
 
         /// <summary>
@@ -1120,6 +1152,13 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttackInputs(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HeavyAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHeavyAttack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "InteractionInput" which allows adding and removing callbacks.

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8377151309574368355}
   - component: {fileID: 4894925909455266758}
   - component: {fileID: 7208770312383436556}
-  - component: {fileID: 360301658299198914}
+  - component: {fileID: 5158370664306769871}
   m_Layer: 0
   m_Name: PP_Birch_Tree_05
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9154215057541871321}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -62,6 +62,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,11 +85,12 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &360301658299198914
+--- !u!136 &5158370664306769871
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +109,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.39185607
-  m_Height: 3.5335233
+  m_Radius: 0.54411566
+  m_Height: 5.701742
   m_Direction: 1
-  m_Center: {x: -0.03825581, y: 1.7667617, z: 0.0067671537}
+  m_Center: {x: 0.0072077513, y: 2.7675438, z: -0.018612504}

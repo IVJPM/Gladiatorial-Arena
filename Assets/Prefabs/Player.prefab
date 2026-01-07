@@ -245,8 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTime: 0
-  dodgeAnimationClip: {fileID: 7400000, guid: b37d690f778a4c64bbe3dc8e0e68b9e6, type: 2}
-  playerMovement: {fileID: 0}
+  dodgeAnimationClip: {fileID: -5793807499516084442, guid: 5fad9ecdaa1678b408a01f37c5ca69e8,
+    type: 3}
+  playerMovement: {fileID: 3939588340446601710}
 --- !u!1001 &7570333188307187449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,37 +269,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 72.25
+      value: -9.584713
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.09
+      value: 1.624
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42.4
+      value: 172.60345
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.43680182
+      value: 0.6790432
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.89955777
+      value: 0.7340984
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
@@ -308,7 +309,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 128.2
+      value: 94.462
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c265032c58a937c41bb8942ddb5de7fb,
         type: 3}
@@ -654,7 +655,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
+  m_AnimatePhysics: 1
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -667,10 +668,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7335889066164702120}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 35
-  m_AngularDrag: 0.05
+  m_LinearDamping: 35
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class DialogueConditionTest : MonoBehaviour
@@ -18,7 +20,7 @@ public abstract class DialogueConditionTest : MonoBehaviour
 
     public virtual void SetConditionActive(/*NPCDialogueBranches npcDialogue*/ NPCInteractions npc) // Try moving to the NPCDialogueBranches script to be able to access the NPCInteractions variables
     {
-        if(npc.currentDialogueIndex == dialogueIndex - 1)
+        if(npc.currentDialogueIndex == dialogueIndex)
         {
             Debug.Log("d");
             gameObject.SetActive(true);
@@ -27,17 +29,19 @@ public abstract class DialogueConditionTest : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        /*for (int i = 0; i < npcDialogue.dialogue.Count; i++)
+    }
+
+    public virtual void SetConditionMetToFalse(NPCInteractions npcInteractor)
+    {
+        if (conditionMet || !npcInteractor.IsInteracting())
         {
-            if (npcDialogue.dialogue.IndexOf(npcDialogue.dialogue[i]) == dialogueIndex - 1)
-            {
-                print("d");
-                gameObject.SetActive(true);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }*/
+            conditionMet = false;
+        }
+    }
+
+    public void SetDialogueConditionToFalse()
+    {
+        //gameObject.SetActive(false);
+        conditionMet = false;
     }
 }

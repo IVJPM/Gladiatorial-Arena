@@ -19,4 +19,5 @@ MonoBehaviour:
   - Good day!
   npcDialogue: []
   currentActiveDialogue: {fileID: 0}
-  dialogueBranchIndex: 0
+  NPC: {fileID: 0}
+  switchDialogue: 0

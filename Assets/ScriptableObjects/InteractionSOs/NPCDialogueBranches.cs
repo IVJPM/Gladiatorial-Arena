@@ -12,12 +12,14 @@ public class NPCDialogueBranches : ScriptableObject
     
     [field:SerializeField] public bool conditionFulfilled { get; private set; }
 
+    [SerializeField] bool keepConditionActive;
+    public DialogueConditionTest conditionClone { get; private set; }
+
+    public DialogueConditionTest condition;
     public int conditionIndex;
 
     private InteractionTextManagerSO dialogueManager;
-    public DialogueConditionTest condition;
-    public DialogueConditionTest conditionClone;
-    [SerializeField] ConditionSpawner conditionSpawner;
+    private ConditionSpawner conditionSpawner;
 
 
     public void SetDialogueBranchParent(InteractionTextManagerSO dialogueManager)
@@ -41,34 +43,31 @@ public class NPCDialogueBranches : ScriptableObject
     public void DialogueCondition()
     {
         conditionFulfilled = conditionClone.conditionMet;
-        //conditionClone.SetConditionActive(this);
 
         if (conditionFulfilled)
         {
-            //if(conditionClone.TryGetComponent(out DialogueConditionTest newDialogue))
             dialogueManager.SetDialoguBranch(this); // Try adding the new dialogue variables on the choice test
         }
-    }
 
+        if(dialogueManager.currentActiveDialogue != this)
+        {
+            conditionClone.SetDialogueConditionToFalse();
+            DisableCondition();
+        }
+    }
     public void EnableCondition()
     {
         conditionClone.gameObject.SetActive(true);
     }
 
-    public void CreateConditions()
+    public void DisableCondition()
     {
-        //conditionClone = condition.InstantiateCondition(dialogueManager.NPC);
-        //conditionClone.gameObject.SetActive(true);
+        conditionClone.SetDialogueConditionToFalse();
+        if (!keepConditionActive)
+        {
+            conditionClone.gameObject.SetActive(false);
+            //conditionClone.SetConditionMetToFalse(conditionSpawner.npc);
+            return;
+        }
     }
-    /*public DialogueConditionTest CheckForCondition()
-    {
-        if( condition != null )
-        {
-            return condition;
-        }
-        else
-        {
-            return null;
-        }
-    }*/
 }

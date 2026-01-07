@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerInputs",
     "maps": [
         {
@@ -283,9 +284,18 @@
                     "name": "AttackInputs",
                     "type": "Button",
                     "id": "213c8b9e-a74b-47b8-a2b2-8ce4f5f88a7e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "HeavyAttack",
+                    "type": "Button",
+                    "id": "11999e73-b0d7-44d3-be69-9401d450e4c0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
                     "initialStateCheck": true
                 }
             ],
@@ -311,6 +321,17 @@
                     "action": "AttackInputs",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c2e3df8-928b-45c3-9dad-f9018b979a84",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -322,7 +343,7 @@
                     "name": "InteractionInput",
                     "type": "Button",
                     "id": "11fba23a-97b3-498a-831d-960416d3a2c1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true

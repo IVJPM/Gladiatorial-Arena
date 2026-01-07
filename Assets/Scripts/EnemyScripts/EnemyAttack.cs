@@ -45,9 +45,10 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
+    //Shouldn't be using null progagation (?.), but they're working, so oh well
     public void EnableWeaponCollider()
     {
-        enemyInventory.OpenWeaponDamageCollider();
+        enemyInventory?.OpenWeaponDamageCollider();
     }
 
     public void DisableWeaponCollider()

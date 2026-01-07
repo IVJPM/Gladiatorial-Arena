@@ -19,7 +19,6 @@ public class InteractionText
      public List<int> setsOfDialogue = new List<int>();
      public int currentSetOfDialogue;
      public int currentDialogueChoice;
-    //[SerializeField]string[,] dialogueOptions;
 
     public string CharacterDialogue()
     {

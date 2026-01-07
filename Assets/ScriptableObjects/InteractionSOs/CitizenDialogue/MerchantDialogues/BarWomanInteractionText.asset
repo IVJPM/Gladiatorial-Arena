@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a88113721a1ca4b800a9d35ddd7131, type: 3}
+  m_Name: BarWomanInteractionText
+  m_EditorClassIdentifier: 
+  npcName: Bar Maiden
+  greetingDialogue:
+  - Hello! Welcome to Felsbane!
+  - What can I do for you?
+  characterDialogue:
+  - Take a look around!
+  - See anything you like?
+  npcDialogue:
+  - {fileID: 11400000, guid: 72a2c5166b1addf4896ff6b0d2386b9c, type: 2}
+  - {fileID: 11400000, guid: facf75a866e8ff040a534dd8ba23c99d, type: 2}
+  - {fileID: 11400000, guid: 316850474a74ff947bbd13d38f8418d4, type: 2}
+  currentActiveDialogue: {fileID: 11400000, guid: 72a2c5166b1addf4896ff6b0d2386b9c,
+    type: 2}
+  NPC: {fileID: 3723416120761314322, guid: c727d34eb73dc344195b60692f4a75b5, type: 3}
+  dialogueBranchIndex: 0
+  switchDialogue: 0
