@@ -27,12 +27,12 @@ public class PlayerSoundFX : MonoBehaviour
     private void StepAudio()
     {
         audioSource.pitch = 1f;
-        audioSource.volume = .1f;
+        audioSource.volume = .75f;
         audioSource.PlayOneShot(runSound);
     }
 
     private void SwordSwingAudio()
     {
-        SoundFXManager.Instance.ActionSoundFX(audioSource, swordSwing, .3f);
+        SoundFXManager.Instance.ActionSoundFX(audioSource, swordSwing, .15f);
     }
 }

@@ -19,7 +19,9 @@ MonoBehaviour:
   isRightHandWeapon: 1
   isLeftHandWeapon: 0
   isEquipped: 1
-  weaponAnimationClip: {fileID: 7400000, guid: af338c1078ee8cf46b75a5a81e3a18a8, type: 2}
-  weaponComboClip: {fileID: 7400000, guid: d66c78f79b6f52546b16a38fda9defd1, type: 2}
-  weaponDamage: 8
-  weaponResetSpeed: 0.35
+  weaponAnimationClip: {fileID: 7400000, guid: b53f397aa47fcc8448ef2b167eba6551, type: 2}
+  weaponComboClip: {fileID: 7400000, guid: 7e342335f3e22154198346862446f2ab, type: 2}
+  weaponDamage: 5
+  regularWeaponDamage: 5
+  weaponComboDamage: 9
+  weaponResetSpeed: 0.352

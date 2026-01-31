@@ -122,10 +122,6 @@ public class PlayerMovement : MonoBehaviour
         if(isDodging && dodgeTimer < .75f)
         {
             dodgeTimer += Time.deltaTime;
-            if(dodgeTimer >= .15f)
-            {
-                playerRB.linearVelocity = dodgeDirection * 20f;
-            }
         }
         else if(dodgeTimer >= .75f)
         {

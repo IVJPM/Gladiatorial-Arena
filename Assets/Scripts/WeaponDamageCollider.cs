@@ -22,8 +22,9 @@ public class WeaponDamageCollider : MonoBehaviour
     {
         CharacterStats damageTarget = other.GetComponent<CharacterStats>();
         
-        if (damageTarget != null && damageTarget.invincibilityFrames == false)
+        if (damageTarget != null && damageTarget.invincibilityFrames == false && damageTarget.currentHealth > 0)
         {
+            SoundFXManager.Instance.CollisionSoundFX(damageTarget.GetComponent<AudioSource>(), damageTarget.takeDamageAudio, .15f);
             damageTarget.CharacterTakeDamage(weaponDamage);
         }
     }

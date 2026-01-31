@@ -6081,7 +6081,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.75
+    m_StopTime: 0.5833333
     m_OrientationOffsetY: -15
     m_Level: -0.86
     m_CycleOffset: 0
@@ -6090,7 +6090,7 @@ AnimationClip:
     m_LoopBlend: 0
     m_LoopBlendOrientation: 1
     m_LoopBlendPositionY: 1
-    m_LoopBlendPositionXZ: 1
+    m_LoopBlendPositionXZ: 0
     m_KeepOriginalOrientation: 0
     m_KeepOriginalPositionY: 0
     m_KeepOriginalPositionXZ: 0
@@ -11607,8 +11607,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.46666667
-    functionName: ChainAttack
+  - time: 0.36666667
+    functionName: SwordSwingAudio
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -11621,7 +11621,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.75
+  - time: 0.5
+    functionName: ChainAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
     functionName: ResetChainAttack
     data: 
     objectReferenceParameter: {fileID: 0}

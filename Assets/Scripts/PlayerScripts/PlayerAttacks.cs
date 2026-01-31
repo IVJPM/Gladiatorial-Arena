@@ -8,7 +8,7 @@ public class PlayerAttacks : MonoBehaviour
     PlayerInputManager playerInputManager;
 
     public float attackReset;
-    private bool canAttack;
+    public int weaponDamage;
 
     [SerializeField] GameObject weaponObject;
     [SerializeField] AnimationClip attackAnimation;
@@ -16,13 +16,10 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] WeaponItemSO playerWeapon;
     [SerializeField] AttackState playerAttackState;
     [SerializeField] WeaponDamageCollider weaponDamageCollider;
-
-    [SerializeField][Range(0, 1)]
-    float attackAnimationResetSpeed;
-
+    
     Animator animator;
     bool attacking;
-    bool transitionAttack;
+    public bool transitionAttack;
     public bool comboAttack;
     PlayerEquipmentManager equipmentManager;
     // Start is called before the first frame update
@@ -40,8 +37,10 @@ public class PlayerAttacks : MonoBehaviour
         if(transitionAttack && !comboAttack)
         {
             comboAttack = true;
-            animator.Play("slash2");
+            animator.CrossFade(playerWeapon.weaponComboClip.name, .1f);
             animator.SetFloat("animationSpeed", 1f);
+            attackReset = 0f;
+
         }
     }
 
@@ -61,13 +60,15 @@ public class PlayerAttacks : MonoBehaviour
             if(playerInputManager.attackInput && !comboAttack)
             {
                 attackAnimation = playerWeapon.weaponAnimationClip;
+                playerWeapon.RegularWeaponDamage();
             }
             else if(comboAttack)
             {
                 attackAnimation = playerWeapon.weaponComboClip;
+                playerWeapon.WeaponComboDamage();
             }
 
-                playerAttackState.SetAttackAnimation(attackAnimation);
+            playerAttackState.SetAttackAnimation(attackAnimation);
         }
         else
         {
@@ -76,7 +77,7 @@ public class PlayerAttacks : MonoBehaviour
         
         if (playerInputManager.attackInput == true && playerWeapon != null || comboAttack && playerWeapon != null)
         {
-            animator.SetFloat("animationSpeed", 1f);
+            animator.SetFloat("animationSpeed", attackAnimation.apparentSpeed);
 
             attackReset += Time.deltaTime;
 
@@ -93,6 +94,7 @@ public class PlayerAttacks : MonoBehaviour
                     comboAttack = false;
                 }
                 attackAnimation = playerWeapon.weaponAnimationClip;
+                transitionAttack = false;
             }
         }
         else if (playerInputManager.attackInput == false || playerWeapon == null)
@@ -124,7 +126,7 @@ public class PlayerAttacks : MonoBehaviour
     public void ResetChainAttack()
     {
         transitionAttack = false;
-        //print("reset");
+        print("reset");
     }
 
     public void TestComboEvent()

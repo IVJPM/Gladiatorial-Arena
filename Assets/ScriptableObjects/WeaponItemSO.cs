@@ -16,7 +16,19 @@ public class WeaponItemSO : Item
 
     [Header("Weapon Base Damage")]
     public int weaponDamage;
+    public int regularWeaponDamage;
+    public int weaponComboDamage;
 
     [Range(0f, 1f)]
     public float weaponResetSpeed;
+
+    public void RegularWeaponDamage()
+    {
+        weaponDamage = regularWeaponDamage;
+    }
+
+    public void WeaponComboDamage()
+    {
+        weaponDamage = weaponComboDamage;
+    }
 }

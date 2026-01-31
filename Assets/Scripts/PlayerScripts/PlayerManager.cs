@@ -34,7 +34,6 @@ public class PlayerManager : CharacterManager
     {
         SetCharacterState();
         stateMachine.state.PerformState();
-        print(stateMachine.state);
     }
 
     void FixedUpdate()
