@@ -16,6 +16,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] WeaponItemSO playerWeapon;
     [SerializeField] AttackState playerAttackState;
     [SerializeField] WeaponDamageCollider weaponDamageCollider;
+    [SerializeField] float testAttackTime;
     
     Animator animator;
     bool attacking;
@@ -40,7 +41,6 @@ public class PlayerAttacks : MonoBehaviour
             animator.CrossFade(playerWeapon.weaponComboClip.name, .1f);
             animator.SetFloat("animationSpeed", 1f);
             attackReset = 0f;
-
         }
     }
 
@@ -126,11 +126,16 @@ public class PlayerAttacks : MonoBehaviour
     public void ResetChainAttack()
     {
         transitionAttack = false;
-        print("reset");
     }
 
     public void TestComboEvent()
     {
         //print("success");
+    }
+
+    IEnumerator AttackResetTime()
+    {
+        testAttackTime += Time.deltaTime;
+        yield return new WaitForSeconds(attackAnimation.length);
     }
 }

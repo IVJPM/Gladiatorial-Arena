@@ -17,4 +17,5 @@ public class StateMachine
         }
     }
 
+    //Try using this to set the enter, perform, and exit states
 }

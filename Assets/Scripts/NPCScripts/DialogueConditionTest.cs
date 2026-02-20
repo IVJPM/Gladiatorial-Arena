@@ -4,8 +4,11 @@ using UnityEngine;
 
 public abstract class DialogueConditionTest : MonoBehaviour
 {
+    public Objective objective;
+
     public bool conditionMet;
     public int dialogueIndex;
+
 
     public virtual void CreateDialogueCondition()
     {
@@ -20,7 +23,7 @@ public abstract class DialogueConditionTest : MonoBehaviour
 
     public virtual void SetConditionActive(/*NPCDialogueBranches npcDialogue*/ NPCInteractions npc) // Try moving to the NPCDialogueBranches script to be able to access the NPCInteractions variables
     {
-        if(npc.currentDialogueIndex == dialogueIndex)
+        if(npc.currentDialogueIndex == dialogueIndex || objective.ObjectiveStarted())
         {
             Debug.Log("d");
             gameObject.SetActive(true);
@@ -28,14 +31,6 @@ public abstract class DialogueConditionTest : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-        }
-    }
-
-    public virtual void SetConditionMetToFalse(NPCInteractions npcInteractor)
-    {
-        if (conditionMet || !npcInteractor.IsInteracting())
-        {
-            conditionMet = false;
         }
     }
 

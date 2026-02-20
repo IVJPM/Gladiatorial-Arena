@@ -5,6 +5,22 @@ using UnityEngine;
 
 public class KillObjective : MonoBehaviour, IObjectives
 {
+    private event EventHandler OnObjectiveKilled;
+
+    event EventHandler IObjectives.OnObjectiveUpdate
+    {
+        add
+        {
+            OnObjectiveKilled += value;
+        }
+
+        remove
+        {
+            OnObjectiveKilled -= value;
+        }
+    }
+
+
     [SerializeField] List<CharacterStats> enemyStats;
     [SerializeField] int killGoalNumber;
     [SerializeField] int killGoalCount;
@@ -15,7 +31,7 @@ public class KillObjective : MonoBehaviour, IObjectives
     {
         for(int i = 0; i < enemyStats.Count; i++)
         {
-            enemyStats[i].OnCharacterDeath += KillObjective_OnCharacterDeath; ;
+            enemyStats[i].OnCharacterDeath += KillObjective_OnCharacterDeath;
         }
     }
 
@@ -33,7 +49,8 @@ public class KillObjective : MonoBehaviour, IObjectives
         {
             if (enemyStats[i].currentHealth <= 0)
             {
-                EvaluateObjectiveProgress();
+                OnObjectiveKilled?.Invoke(this, EventArgs.Empty);
+                //enemyStats.RemoveAt(i);
                 enemyStats[i].OnCharacterDeath -= KillObjective_OnCharacterDeath;
             }
         }
@@ -45,15 +62,18 @@ public class KillObjective : MonoBehaviour, IObjectives
         objective.SetObjectiveStartedToTrue();
     }
 
-    public void EvaluateObjectiveProgress()
+    public void EvaluateObjectiveProgress(Task task)
     {
         if(killGoalCount >= killGoalNumber)
         {
             objectiveComplete = true;
+            task.taskCompletion = objectiveComplete;
+            StartCoroutine(RemoveCompletedKills());
         }
         else
         {
-            objectiveComplete = false; 
+            objectiveComplete = false;
+            task.taskCompletion = objectiveComplete;
         }
     }
 
@@ -65,5 +85,11 @@ public class KillObjective : MonoBehaviour, IObjectives
     public bool ObjectiveCompletion()
     {
         return objectiveComplete;
+    }
+
+    IEnumerator RemoveCompletedKills()
+    {
+        yield return new WaitForSeconds(2);
+        enemyStats.Clear();
     }
 }

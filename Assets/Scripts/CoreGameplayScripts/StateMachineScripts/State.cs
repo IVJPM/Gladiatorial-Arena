@@ -24,11 +24,17 @@ public abstract class State : MonoBehaviour
 
     public virtual void PerformState() { }
 
-    public virtual void ExitState() { }
+    public virtual void ExitState() { startTime = 0; }
 
    public void SetStateCore(StateMachineController controller) 
     {
         this.controller = controller;
+    }
+
+    public virtual void PerformStateBranch()
+    {
+        PerformState();
+        controller.stateMachine.state?.PerformStateBranch();
     }
 
     public void Initialize()

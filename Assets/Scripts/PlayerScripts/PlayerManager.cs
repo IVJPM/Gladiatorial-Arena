@@ -83,7 +83,7 @@ public class PlayerManager : CharacterManager
                 playerMovement.movementSpeed = stopMovement;   
                 stateMachine.Set(attackState);
             }
-            else if(playerMovement.isDodging && !playerInputManager.attackInput || playerMovement.isDodging && !playerAttacks.comboAttack)
+            else if(playerMovement.isDodging && !playerInputManager.attackInput )
             {
                 stateMachine.Set(dodgeState);
             }

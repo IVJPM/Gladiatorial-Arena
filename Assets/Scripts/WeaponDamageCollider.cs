@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponDamageCollider : MonoBehaviour
 {
-    Collider weaponCollider;
+    public Collider weaponCollider;
     public int weaponDamage;
     // Start is called before the first frame update
     void Awake()

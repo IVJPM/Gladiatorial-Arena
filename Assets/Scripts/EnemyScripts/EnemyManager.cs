@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class EnemyManager : CharacterManager
 {
@@ -9,6 +10,8 @@ public class EnemyManager : CharacterManager
     public State runState;
     public State attackState;
     public State deathState;
+    public State pursueState;
+    public State engageTarget;
 
     [SerializeField] float chasePlayerSpeed;
     private float activeTimer;
@@ -28,6 +31,7 @@ public class EnemyManager : CharacterManager
 
         SetUpStateInstances();
         stateMachine.Set(idleState);
+        //stateMachine.state.PerformStateBranch();
     }
 
     // Update is called once per frame
@@ -48,28 +52,32 @@ public class EnemyManager : CharacterManager
     {
         if (groundCheck.isGrounded)
         {
-            if (enemyMovement.chasingPlayer == false && enemyStats.currentHealth != 0)
+            if (enemyMovement.chasingPlayer == false && enemyStats.currentHealth != 0 && !enemyAttack.canAttackPlayer)
             {
-                if (enemyAttack.canAttackPlayer == true)
-                {
-                    stateMachine.Set(attackState);
-                }
-                else
-                {
-                    stateMachine.Set(idleState);
-                }
+                stateMachine.Set(idleState);
             }
-            else if (enemyMovement.chasingPlayer == true && enemyStats.currentHealth != 0)
+            else if (enemyMovement.chasingPlayer == true && enemyStats.currentHealth != 0 && !enemyAttack.canAttackPlayer)
             {
                 enemyMovement.enemyRunSpeed = chasePlayerSpeed;
                 stateMachine.Set(runState);
             }
-            else if(enemyStats.currentHealth <= 0)
+            else if(enemyAttack.canAttackPlayer && enemyStats.currentHealth != 0)
+            {
+                stateMachine.Set(pursueState);
+            }
+            else if (enemyStats.currentHealth <= 0)
             {
                 stateMachine.Set(deathState);
+                enemyMovement.enemyRunSpeed = 0;
                 StartCoroutine(DestroyEnemy());
             }
         }
+        //stateMachine.state.PerformStateBranch();
+    }
+
+    private void GetAttackState()
+    {
+        stateMachine.Set(attackState);
     }
 
     IEnumerator DestroyEnemy()
@@ -78,4 +86,9 @@ public class EnemyManager : CharacterManager
         Destroy(gameObject);
     }
 
+    IEnumerator EnemyAttackIntervals()
+    {
+        yield return new WaitForSeconds(3);
+        pursueState.GetComponent<PursueState>().intervalTracker = 0;
+    }
 }

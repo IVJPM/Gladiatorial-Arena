@@ -10,7 +10,8 @@ public class AttackState : State
     {
         if(attackAnimationClip != null )
         {
-            animator.CrossFade(attackAnimationClip.name, .1f);
+            if (!animator.GetNextAnimatorStateInfo(0).IsName(attackAnimationClip.name))
+                animator.CrossFade(attackAnimationClip.name, .1f);
         }
         else
         {
@@ -34,5 +35,10 @@ public class AttackState : State
     public void SetAttackAnimation(AnimationClip attackAnimationClip)
     {
         this.attackAnimationClip = attackAnimationClip;
+    }
+
+    public AnimationClip GetAttackAnimationClip()
+    {
+        return attackAnimationClip;
     }
 }

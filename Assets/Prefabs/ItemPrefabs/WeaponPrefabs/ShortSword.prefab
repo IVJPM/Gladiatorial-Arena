@@ -114,8 +114,8 @@ GameObject:
   - component: {fileID: 3089544130313804705}
   - component: {fileID: 2187440921229714274}
   - component: {fileID: 964988181890589693}
-  - component: {fileID: 5069177828122868282}
   - component: {fileID: 8411036476280897514}
+  - component: {fileID: 5724745175666864555}
   m_Layer: 9
   m_Name: ShortSwordModel
   m_TagString: Dagger
@@ -166,6 +166,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -187,32 +189,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5069177828122868282
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7570625639955619089}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 768
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4026644384297347843, guid: 4347ff9e33c8eaf44a8c3b911cc3db0a, type: 3}
 --- !u!114 &8411036476280897514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,4 +206,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3a315449ac063418b0a9312e77716b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponCollider: {fileID: 5724745175666864555}
   weaponDamage: 0
+--- !u!136 &5724745175666864555
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570625639955619089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.031056888
+  m_Height: 0.2968622
+  m_Direction: 1
+  m_Center: {x: -0.00003493411, y: 0.17638554, z: 0.00036484763}

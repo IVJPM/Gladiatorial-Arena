@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4573378402886791802
+--- !u!1 &2199941924953741353
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,57 +8,57 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6701368623637715984}
-  - component: {fileID: -317372061291330644}
-  - component: {fileID: 4192855810890037930}
+  - component: {fileID: 9002748059419293251}
+  - component: {fileID: 6514548266045090303}
+  - component: {fileID: 1999634305404473593}
   m_Layer: 0
-  m_Name: TaskTestObject
+  m_Name: ObjectiveTaskContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6701368623637715984
+--- !u!4 &9002748059419293251
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573378402886791802}
+  m_GameObject: {fileID: 2199941924953741353}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.9255405, z: -0, w: 0.37864867}
+  m_LocalPosition: {x: 232.22073, y: -14.0886, z: 221.60434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-317372061291330644
+--- !u!114 &6514548266045090303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573378402886791802}
+  m_GameObject: {fileID: 2199941924953741353}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faaf6f84fa1ccaf4f89117b92ca7228c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskTestScript
---- !u!114 &4192855810890037930
+--- !u!114 &1999634305404473593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573378402886791802}
+  m_GameObject: {fileID: 2199941924953741353}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8e681de1a3c7a04db23bd843f372015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Objective
-  conditionMet: 0
-  dialogueIndex: 0
+  objectiveCondition: {fileID: 3814515560815017220, guid: 649312ddb9baa7c4faa1f32df7898764,
+    type: 3}
   task:
   - taskDescription: Kill the Plague Doctor
     objectiveTargets: 1

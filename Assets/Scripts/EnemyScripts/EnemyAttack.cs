@@ -8,6 +8,7 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField] Transform target;
     [SerializeField] Transform weaponSlot;
+    [SerializeField] bool transitionAttack;
 
     private float attackDistance;
 
@@ -29,31 +30,40 @@ public class EnemyAttack : MonoBehaviour
     {
         attackDistance = Vector3.Distance(transform.position, target.position);
 
-        if(attackDistance < 5f)
+        if(attackDistance < 1.15f)
         {
             canAttackPlayer = true;
-            //animator.SetLayerWeight(layerIndex, layerWeight);
-            //animator.SetTrigger("attack");
-            //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = true;
+            //StartCoroutine(EnemyAttackIntervals());
         }
 
         else
         {
             canAttackPlayer = false;
-            //animator.SetLayerWeight(0, 0);
-            //weaponSlot.GetChild(0).GetComponent<Collider>().enabled = false;
         }
     }
 
     //Shouldn't be using null progagation (?.), but they're working, so oh well
     public void EnableWeaponCollider()
     {
-        enemyInventory?.OpenWeaponDamageCollider();
+        enemyInventory.OpenWeaponDamageCollider();
     }
 
     public void DisableWeaponCollider()
     {
-        enemyInventory?.CloseWeaponDamageCollider();
+        enemyInventory.CloseWeaponDamageCollider();
 
+    }
+
+    public void ResetChainAttack()
+    {
+        transitionAttack = false;
+    }
+
+    IEnumerator EnemyAttackIntervals()
+    {
+        canAttackPlayer = false;
+        yield return new WaitForSeconds(Random.Range(0, 2));
+        canAttackPlayer = true;
+        
     }
 }

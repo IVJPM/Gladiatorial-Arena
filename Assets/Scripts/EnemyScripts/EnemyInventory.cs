@@ -8,12 +8,12 @@ public class EnemyInventory : CharacterInventoryManager
     [field: SerializeField] public WeaponItemSO leftHandWeapon { get; private set; }
 
     [SerializeField] GameObject weaponSlot;
-    [SerializeField] WeaponDamageCollider weaponDamageCollider;
+    [field:SerializeField] public WeaponDamageCollider weaponDamageCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //LoadWeaponDamageCOllider();
     }
 
     // Update is called once per frame
@@ -32,18 +32,20 @@ public class EnemyInventory : CharacterInventoryManager
 
 
 
-    public void LoadWeaponDamageCOllider()
+    public void LoadWeaponDamageCollider()
     {
-        weaponDamageCollider = rightHandWeapon.weaponModel.GetComponentInChildren<WeaponDamageCollider>();
+        weaponDamageCollider = weaponSlot.gameObject.GetComponentInChildren<WeaponDamageCollider>();
     }
 
     public void OpenWeaponDamageCollider()
     {
+        LoadWeaponDamageCollider();
         weaponDamageCollider.EnableWeaponCollider();
     }
 
     public void CloseWeaponDamageCollider()
     {
+        LoadWeaponDamageCollider();
         weaponDamageCollider.DisableWeaponCollider();
     }
 }

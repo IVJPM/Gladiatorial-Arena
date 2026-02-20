@@ -1,7 +1,21 @@
+using System;
 using UnityEngine;
 
 public class RetrieveObjective : MonoBehaviour, IObjectives
 {
+    event EventHandler IObjectives.OnObjectiveUpdate
+    {
+        add
+        {
+            throw new NotImplementedException();
+        }
+
+        remove
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public void BeginObjective(Objective objective)
     {
         throw new System.NotImplementedException();
@@ -12,7 +26,7 @@ public class RetrieveObjective : MonoBehaviour, IObjectives
         throw new System.NotImplementedException();
     }
 
-    public void EvaluateObjectiveProgress()
+    public void EvaluateObjectiveProgress(Task task)
     {
         throw new System.NotImplementedException();
     }

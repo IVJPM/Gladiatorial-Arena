@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2976027587989487290}
   - component: {fileID: 7561991136667244411}
   m_Layer: 0
-  m_Name: ConditionSpawner
+  m_Name: BarMaidenConditionSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

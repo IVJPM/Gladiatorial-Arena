@@ -17,30 +17,20 @@ public class Task
 
     public GameObject test;
 
-
-    public void SetTask(Objective testObject)
-    {
-        //testObject.SetObjectiveStartedToTrue();
-        Debug.Log(testObject.name);
-    }
-
     public void InitiateTask(Objective objective)
     {
-        OnTaskCompletion += Task_OnTaskCompletion;
         objectiveType = test.GetComponent<IObjectives>();
         objectiveType.BeginObjective(objective);
+        objectiveType.OnObjectiveUpdate += ObjectiveType_OnObjectiveUpdate;
     }
 
-    private void Task_OnTaskCompletion(object sender, EventArgs e)
+    private void ObjectiveType_OnObjectiveUpdate(object sender, EventArgs e)
     {
-        if(objectiveType.ObjectiveCompletion())
-        {
-            OnTaskCompletion?.Invoke(this, EventArgs.Empty);
-        }
+        OnTaskCompletion?.Invoke(this, EventArgs.Empty);
     }
 
     public void EvaluateQuestCompletion() // Flip this with the objectiveType
     {
-        objectiveType.EvaluateObjectiveProgress();
+        objectiveType.EvaluateObjectiveProgress(this);
     }
 }

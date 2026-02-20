@@ -42,7 +42,10 @@ public class NPCDialogueBranches : ScriptableObject
 
     public void DialogueCondition()
     {
-        conditionFulfilled = conditionClone.conditionMet;
+        if (conditionClone != null)
+        {
+            conditionFulfilled = conditionClone.conditionMet;
+        }
 
         if (conditionFulfilled)
         {

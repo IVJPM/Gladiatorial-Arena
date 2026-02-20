@@ -6,7 +6,7 @@ public class ConditionSpawner : MonoBehaviour
 {
     public List<NPCDialogueBranches> dialogueBranches;
 
-    public NPCInteractions npc;
+    public Transform npc;
     public List <DialogueConditionTest> condition;
     public List <DialogueConditionTest> conditionClone;
     public int conditionIndex;

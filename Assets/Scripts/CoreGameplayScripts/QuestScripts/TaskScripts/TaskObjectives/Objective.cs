@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
     public event EventHandler OnObjectiveStarted;
+    public event EventHandler OnObjectiveFinished;
 
+
+    [SerializeField] ObjectiveCondition objectiveCondition;
 
     [SerializeField] List<Task> task = new List<Task>();
     [SerializeField] int maxTasks;
@@ -16,14 +20,16 @@ public class Objective : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        for(int i  = 0; i < maxTasks; i++)
+            objectiveCondition.AssignObjective(this);
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < maxTasks; i++)
         {
-            //task.Add(new Task());
             task[i].OnTaskCompletion += Objective_OnTaskCompletion;
-            task[i].SetTask(this);
             task[i].InitiateTask(this);
         }
-
     }
 
     private void Objective_OnTaskCompletion(object sender, EventArgs e)
@@ -49,16 +55,21 @@ public class Objective : MonoBehaviour
         {
             task[i].EvaluateQuestCompletion();
 
-            if (!task[i].taskCompletion)
+            if (task[i].taskCompletion)
             {
-                objectiveFinished = false;
-                return;
+                objectiveFinished = true;
+                OnObjectiveFinished?.Invoke(this, EventArgs.Empty);
+                task[i].OnTaskCompletion -= Objective_OnTaskCompletion;
             }
             else
             {
-                task[i].OnTaskCompletion -= Objective_OnTaskCompletion;
-                objectiveFinished = true;
+                objectiveFinished = false;
             }
         }
+    }
+
+    public bool ObjectiveStarted()
+    {
+        return objectiveStarted; 
     }
 }

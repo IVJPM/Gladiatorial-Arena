@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ConditionInformation : DialogueConditionTest
 {
+    // Change script name to something reflecting dialogue condition
+
     [SerializeField] ConditionActivation condition;
     [SerializeField] ConditionChoiceTest conditionChoices;
     
@@ -30,7 +32,7 @@ public class ConditionInformation : DialogueConditionTest
         {   
             ConditionStruct conditionStruct = new ConditionStruct();
             conditionMet = true;
-            conditionStruct.ActivateCondition(condition);
+            //conditionStruct.ActivateCondition(condition);
         }
         else
         {
